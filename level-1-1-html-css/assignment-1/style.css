@@ -1,8 +1,16 @@
+/**
+Use flex and justify-content for placement of blocks at the center
+ */
 body {
     display: flex;
     justify-content: center;
 }
 
+/**
+Create flex container for two items flex description and block logo.
+Sets background, border for container, padding for content and text
+aligning
+ */
 .container {
     display: flex;
     padding: 20px;
@@ -11,6 +19,10 @@ body {
     max-width: 1600px;
     text-align: justify;
 
+    /**
+    Block with a image.
+    Set the size of the block and an image
+     */
     .logo {
         width: 30%;
         min-width: 300px;
@@ -23,7 +35,11 @@ body {
         }
     }
 
-    .description {
+    /**
+    Flex item with the text.
+    Set direction and fonts for a text
+     */
+    .text {
         display: flex;
         flex-direction: column;
         margin-right: 40px;
@@ -43,6 +59,9 @@ body {
     }
 }
 
+/**
+Media query with style rules for good looking on other devices
+ */
 @media screen and (max-width: 800px) {
     .container {
         flex-direction: column-reverse;
@@ -57,7 +76,7 @@ body {
             }
         }
 
-        .description {
+        .text {
             margin: 0;
         }
     }
