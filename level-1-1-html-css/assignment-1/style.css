@@ -13,7 +13,7 @@ aligning
  */
 .container {
     display: flex;
-    padding: 20px;
+
     background-color: #FFF3F0;
     border: 1px solid #F4C6B1;
     max-width: 1600px;

@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    --bg-color: #2B4074;
+    --bg-hover-color: #274693;
+}
+
+.container {
+    width: 100%;
+    max-width: 1440px;
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--bg-color);
+
+
+        .navigation_logo {
+            display: flex;
+            margin-left: 153px;
+            margin-top: 17px;
+            margin-bottom: 17px;
+            width: auto;
+        }
+
+        .navigation_button button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            margin: 30px 135px 30px 0;
+            border-radius: 5px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .burger_logo {
+            display: flex;
+            width: 12px;
+        }
+    }
+
+    .intro {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        background-image: url("../images/bg-img.jpg");
+        background-repeat: no-repeat;
+        color: white;
+        text-align: center;
+
+
+        .intro_h1 {
+            font-family: "Roboto Condensed", "Times New Roman", monospace;
+            font-weight: 400;
+            font-size: 96px;
+            line-height: 96px;
+            margin-top: 107px;
+            margin-bottom: 0;
+        }
+
+        .intro_text {
+            margin-top: 18px;
+            font-family: "Roboto Condensed", "Times New Roman", monospace;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 26px;
+        }
+
+        .read-more a:link, .read-more a:visited {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            margin-top: 28px;
+            background: var(--bg-color);
+            height: 50px;
+            width: 200px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        .read-more a:hover, .read-more a:active {
+            background-color: #274693;
+            cursor: pointer;
+        }
+
+        .intro_pagination {
+            display: flex;
+            justify-content: space-between;
+            margin: 123px 0 78px 0;
+            height: 12px;
+            width: 50px;
+        }
+
+        .intro_pagination .no-active {
+            width: 10px;
+            height: 10px;
+            margin-top: 1px;
+            border-radius: 50px;
+            background-color: white;
+        }
+
+        .intro_pagination .active {
+            width: 10px;
+            height: 10px;
+            border-radius: 50px;
+            border: 1px solid white;
+        }
+
+        .pagination_buttons {
+            display: flex;
+            position: absolute;
+            flex-direction: column;
+            margin-left: 1370px;
+            margin-top: 264px;
+        }
+
+        .pagination_back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: var(--bg-color);
+        }
+
+        .pagination_forward {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            margin-top: 1px;
+            background-color: #F9F6E5;
+        }
+    }
+
+    .promo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--bg-color);
+
+        .promo_text {
+            margin-left: 150px;
+            color: #ffffff;
+
+        }
+        .promo_text h1 {
+            margin-bottom: 0;
+            font-family: "Roboto", "Times New Roman", monospace;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 32px;
+        }
+
+        .promo_text p {
+            margin-top: 4px;
+            font-family: "Roboto", "Geneva", monospace;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 18px;
+        }
+
+        .promo_button a:link, .promo_button a:visited {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #F9F6E5;
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 135px;
+            margin-top: 71px;
+            margin-bottom: 71px;
+            height: 50px;
+            width: 200px;
+            font-family: "Roboto", "Times New Roman", sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 18px;
+
+        }
+
+        .promo_button a:hover, .promo_button a:active {
+            background-color: #FFF3AF;
+        }
+    }
+
+    .services {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .services_text {
+            display: flex;
+            flex-direction: column;
+            margin-left: 62px;
+
+        }
+        .services_text h1 {
+            margin-top: 90px;
+            font-family: "Roboto Condensed", "Times New Roman", monospace;
+            color: var(--bg-color);
+            font-weight: 400;
+            font-size: 48px;
+            line-height: 56px;
+        }
+
+        .services_text h3 {
+            font-family: "Roboto", "Times New Roman", monospace;
+            color: #4A4A4A;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 26px;
+        }
+
+        hr {
+            background-color: var(--bg-color);
+            height: 8px;
+            width: 99px;
+            margin-left: 0;
+        }
+
+        p {
+            font-family: "Roboto", "Times New Roman", monospace;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 24px;
+            color: #797979;
+        }
+
+        .services_grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+
+        }
+
+        .services_grid div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #F9F6E5;
+            border-right: none;
+            width: 242px;
+            height: 278px;
+        }
+
+        .services_grid img {
+
+        }
+
+
+    }
+
+}
+
