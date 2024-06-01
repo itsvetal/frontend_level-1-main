@@ -119,10 +119,10 @@ body {
         }
 
         .pagination_buttons {
-            display: flex;
+            display: block;
             position: absolute;
             flex-direction: column;
-            margin-left: 1370px;
+            margin-left: 1364px;
             margin-top: 264px;
         }
 
@@ -130,8 +130,6 @@ body {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 70px;
-            height: 70px;
             background-color: var(--bg-color);
         }
 
@@ -139,11 +137,17 @@ body {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 70px;
-            height: 70px;
-            margin-top: 1px;
             background-color: #F9F6E5;
         }
+
+        .pagination_forward img {
+            margin: 22px;
+        }
+
+        .pagination_back img {
+            margin: 22px;
+        }
+
     }
 
     .promo {
@@ -259,30 +263,34 @@ body {
         .services_grid_cell {
             display: flex;
             justify-content: center;
-            align-items: center;
             border: 1px solid #F9F6E5;
             border-right: none;
-            width: 242px;
-            height: 278px;
+
         }
 
         .grid_content {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: start;
+            text-align: center;
             border: 4px solid var(--bg-color);
-            width: 235px;
+
 
         }
 
         .grid_content img {
-            margin-bottom: 28px;
+            margin-top: 25px;
+            margin-bottom: 16px;
+            margin-right: 82px;
+            margin-left: 82px;
+
 
         }
 
-        .grid_content p {
+        .grid_text1 {
             margin-top: 0;
+            margin-bottom: 22px;
             color: #4A4A4A;
             font-family: "Roboto Condensed", "Times New Roman", monospace;
             font-weight: 700;
@@ -290,9 +298,36 @@ body {
             line-height: 19px;
             letter-spacing: 2px;
         }
+        #target.grid_text1 {
+            margin-bottom: 3px;
+        }
 
+        .grid_text2 {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-family: "Roboto", "Times New Roman", monospace;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 18px;
+            color: #9B9B9B;
+        }
+
+        .grid_content a:link, .grid_content a:visited {
+            margin-top: 18px;
+            margin-bottom: 20px;
+            color: var(--bg-color);
+            text-decoration: none;
+            font-family: "Roboto Condensed", "Times New Roman", monospace;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 2px;
+        }
+
+        .grid_content a:hover, .grid_content a:active {
+            color: var(--bg-hover-color);
+        }
 
     }
 
 }
-
