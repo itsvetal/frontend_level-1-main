@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
 
 body {
     display: flex;
@@ -122,8 +121,8 @@ body {
             display: block;
             position: absolute;
             flex-direction: column;
-            margin-left: 1364px;
-            margin-top: 264px;
+            right: 0;
+            top: 264px;
         }
 
         .pagination_back {
@@ -131,6 +130,7 @@ body {
             align-items: center;
             justify-content: center;
             background-color: var(--bg-color);
+            cursor: pointer;
         }
 
         .pagination_forward {
@@ -138,6 +138,7 @@ body {
             align-items: center;
             justify-content: center;
             background-color: #F9F6E5;
+            cursor: pointer;
         }
 
         .pagination_forward img {
@@ -260,37 +261,29 @@ body {
             flex-direction: row;
         }
 
+        /*
+        Grid without focus
+         */
         .services_grid_cell {
-            display: flex;
-            justify-content: center;
-            border: 1px solid #F9F6E5;
-            border-right: none;
-
-        }
-
-        .grid_content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: start;
             text-align: center;
-            border: 4px solid var(--bg-color);
-
+            border: 1px solid #F9F6E5;
+            border-right: none;
+            width: 242px;
+            height: 278px;
 
         }
 
-        .grid_content img {
-            margin-top: 25px;
-            margin-bottom: 16px;
-            margin-right: 82px;
-            margin-left: 82px;
-
-
+        .services_grid_cell img {
+            margin-top: 80px;
+            margin-bottom: 28px;
         }
 
         .grid_text1 {
             margin-top: 0;
-            margin-bottom: 22px;
             color: #4A4A4A;
             font-family: "Roboto Condensed", "Times New Roman", monospace;
             font-weight: 700;
@@ -298,34 +291,68 @@ body {
             line-height: 19px;
             letter-spacing: 2px;
         }
-        #target.grid_text1 {
-            margin-bottom: 3px;
-        }
 
         .grid_text2 {
-            margin-top: 0;
-            margin-bottom: 0;
-            font-family: "Roboto", "Times New Roman", monospace;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 18px;
-            color: #9B9B9B;
+            display: none;
         }
 
         .grid_content a:link, .grid_content a:visited {
-            margin-top: 18px;
-            margin-bottom: 20px;
-            color: var(--bg-color);
-            text-decoration: none;
-            font-family: "Roboto Condensed", "Times New Roman", monospace;
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 19px;
-            letter-spacing: 2px;
+            display: none;
         }
 
-        .grid_content a:hover, .grid_content a:active {
-            color: var(--bg-hover-color);
+        /*
+        Hover effect on the grid cell
+         */
+        .services_grid_cell:hover {
+            .grid_content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 227px;
+                height: 263px;
+                border: 4px solid var(--bg-color);
+            }
+
+            .grid_content img {
+                margin-top: 25px;
+                margin-bottom: 16px;
+            }
+
+            .grid_text1 {
+                margin-bottom: 22px;
+            }
+
+            #target.grid_text1 {
+                margin-bottom: 3px;
+            }
+
+            .grid_text2 {
+                display: flex;
+                margin-top: 0;
+                margin-bottom: 0;
+                font-family: "Roboto", "Times New Roman", monospace;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 18px;
+                color: #9B9B9B;
+            }
+
+            .grid_content a:link, .grid_content a:visited {
+                display: flex;
+                margin-top: 18px;
+                margin-bottom: 20px;
+                color: var(--bg-color);
+                text-decoration: none;
+                font-family: "Roboto Condensed", "Times New Roman", monospace;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 19px;
+                letter-spacing: 2px;
+            }
+
+            .grid_content a:hover, .grid_content a:active {
+                color: var(--bg-hover-color);
+            }
         }
 
     }
