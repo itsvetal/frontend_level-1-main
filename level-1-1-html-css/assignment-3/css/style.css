@@ -25,7 +25,7 @@ body {
             width: auto;
         }
 
-        .navigation_button button{
+        .navigation_button button {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -148,7 +148,6 @@ body {
         .pagination_back img {
             margin: 22px;
         }
-
     }
 
     .promo {
@@ -162,6 +161,7 @@ body {
             color: #ffffff;
 
         }
+
         .promo_text h1 {
             margin-bottom: 0;
             font-family: "Roboto", "Times New Roman", monospace;
@@ -214,6 +214,7 @@ body {
             margin-left: 62px;
 
         }
+
         .services_text h1 {
             margin-top: 90px;
             font-family: "Roboto Condensed", "Times New Roman", monospace;
@@ -264,6 +265,7 @@ body {
         /*
         Grid without focus
          */
+
         .services_grid_cell {
             display: flex;
             flex-direction: column;
@@ -296,15 +298,16 @@ body {
             display: none;
         }
 
-        .grid_content a:link, .grid_content a:visited {
+        .grid_hover a:link, .grid_hover a:visited {
             display: none;
         }
 
         /*
         Hover effect on the grid cell
          */
+
         .services_grid_cell:hover {
-            .grid_content {
+            .grid_hover {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -313,7 +316,7 @@ body {
                 border: 4px solid var(--bg-color);
             }
 
-            .grid_content img {
+            .grid_hover img {
                 margin-top: 25px;
                 margin-bottom: 16px;
             }
@@ -337,7 +340,7 @@ body {
                 color: #9B9B9B;
             }
 
-            .grid_content a:link, .grid_content a:visited {
+            .grid_hover a:link, .grid_hover a:visited {
                 display: flex;
                 margin-top: 18px;
                 margin-bottom: 20px;
@@ -350,11 +353,97 @@ body {
                 letter-spacing: 2px;
             }
 
-            .grid_content a:hover, .grid_content a:active {
+            .grid_hover a:hover, .grid_hover a:active {
                 color: var(--bg-hover-color);
             }
         }
 
     }
+
+    .projects {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(var(--bg-color), transparent);
+        color: #ffffff;
+
+    }
+
+    .projects h1 {
+        margin-top: 80px;
+        margin-bottom: 0;
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 400;
+        font-size: 48px;
+        line-height: 56px;
+
+    }
+
+    .projects hr {
+        margin-top: 24px;
+        margin-bottom: 0;
+        background-color: #ffffff;
+        height: 8px;
+        width: 100px;
+    }
+
+    .projects p {
+        margin-top: 29px;
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 18px;
+        letter-spacing: 2px;
+        color: var(--bg-color);
+    }
+
+    .projects_content {
+        margin-top: 80px;
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .project_image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 0;
+    }
+
+    .project_image img {
+        -webkit-mask-image: url(../images/mask.png);
+        mask-image: url(../images/mask.png);
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        margin-bottom: 0;
+    }
+
+    .project_image:hover {
+        .project_image_item {
+            position: relative;
+        }
+        .project_image_item img {
+            width: 100%;
+        }
+
+        .project_image_item:after {
+            content: '';
+            width: 80%;
+            height: 80%;
+            position: absolute;
+            top: 11px;
+            left: 12px;
+            bottom: 11px;
+            right: 12px;
+            background: rgba(249, 246, 229, 0.8);
+        }
+    }
+
+
+
+
 
 }
