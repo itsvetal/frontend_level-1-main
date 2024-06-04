@@ -432,7 +432,7 @@ body {
         align-items: center;
     }
 
-    .overlay img {
+    .project_image .overlay img {
         width: 30px;
         height: 30px;
         margin: 0 5px;
@@ -453,6 +453,195 @@ body {
         color: var(--bg-color);
     }
 
+    .video {
+        display: flex;
+        margin-top: 50px;
+        margin-bottom: 80px;
+        justify-content: space-between;
+    }
 
+    .video_image {
+        margin-left: 147px;
+    }
+
+    .video_image img {
+        border-radius: 5px;
+    }
+
+    .video_description {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        margin-right: 224px;
+
+    }
+
+    .video_description h1 {
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 400;
+        font-size: 48px;
+        line-height: 56px;
+        color: rgba(74, 74, 74, 1);
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .video_description hr {
+        margin-top: 30px;
+        margin-bottom: 39px;
+        margin-left: 0;
+        width: 113px;
+        height: 8px;
+        background-color: var(--bg-color);
+    }
+
+    .video_description p {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-family: "Roboto", "Times New Roman", monospace;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        color: rgba(155, 155, 155, 1);
+    }
+
+    .video_button a:link, .video_button a:visited {
+        margin-top: 39px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        width: 230px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: rgba(249, 246, 229, 1);
+        background-color: var(--bg-color);
+        font-family: "Roboto", "Times New Roman", monospace;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 18px;
+    }
+
+    .video_button a:hover, .video_button a:active {
+        background-color: var(--bg-hover-color);
+    }
+
+    .news {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(249, 246, 229, 1);
+    }
+
+    .news h1 {
+        margin-top: 52px;
+        margin-bottom: 19px;
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 400;
+        font-size: 48px;
+        line-height: 56px;
+        color: rgba(74, 74, 74, 1);
+    }
+
+    .news hr {
+        margin-top: 0;
+        margin-bottom: 0;
+        background-color: rgba(43, 64, 116, 1);
+        height: 8px;
+        width: 100px;
+
+    }
+
+    .news_mansory {
+        margin-top: 115px;
+        margin-bottom: 80px;
+        column-count: 4;
+        column-gap: 0;
+    }
+
+    .news_content {
+        break-inside: avoid;
+        padding: 15px;
+    }
+
+    .news_blog {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: stretch;
+
+    }
+
+    .news_blog img {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .news_overlay a {
+        display: none;
+    }
+
+
+    .news_text {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        border-radius: 0 0 5px 5px;
+        background-color: rgba(255, 255, 255, 1);
+        width: auto;
+
+    }
+
+    .news_text p {
+        margin-left: 20px;
+        color: rgba(74, 74, 74, 1);
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 18px;
+        letter-spacing: 2px;
+    }
+
+    .news_content:hover {
+
+        .news_blog {
+            position: relative;
+            display: inline-block;
+        }
+
+        .news_blog img {
+            width: 100%;
+        }
+
+        .news_overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 95%;
+            height: 95%;
+            border: 10px solid rgba(43, 64, 116, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .news_overlay a {
+            display: flex;
+        }
+
+        .news_text {
+            position: absolute;
+            bottom: 21px;
+            width: 100%;
+            border-radius: unset;
+            background-color: rgba(43, 64, 116, 1);
+        }
+
+        .news_text p {
+            color: rgba(249, 246, 229, 1);
+        }
+    }
 
 }
