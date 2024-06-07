@@ -391,6 +391,8 @@ body {
     .projects_portfolio {
         margin-top: 80px;
         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         margin-bottom: 80px;
     }
 
@@ -849,5 +851,40 @@ body {
         position: absolute;
         right: -10px;
 
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container .services {
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+    }
+
+    .container .services br {
+        display: none;
+    }
+
+    .container .services h1 {
+        text-align: center;
+    }
+
+    .container .projects_portfolio {
+        justify-content: center;
+        margin-left: 180px;
+        margin-right: 180px;
+    }
+
+    .container .video {
+        justify-content: space-between;
+    }
+
+    .container .video_description {
+        margin-right: unset;
+        margin-left: 60px;
+    }
+
+    .container .news_mansory {
+        column-count: 3;
     }
 }
