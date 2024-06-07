@@ -8,24 +8,21 @@ body {
 
 /**
 Create flex container for two items flex description and block logo.
-Sets background, border for container, padding for content and text
-aligning
  */
 .container {
     display: flex;
-
+    justify-content: space-around;
     background-color: #FFF3F0;
-    border: 1px solid #F4C6B1;
     max-width: 1600px;
     text-align: justify;
 
     /**
     Block with a image.
-    Set the size of the block and an image
      */
 
     .logo {
-        width: 30%;
+        width: 20%;
+        margin-top: 20px;
         min-width: 300px;
 
         img {
@@ -44,7 +41,9 @@ aligning
     .text {
         display: flex;
         flex-direction: column;
-        margin-right: 40px;
+        justify-content: start;
+        align-items: start;
+
 
         h1 {
             font-family: "Merriweather", "Times New Roman", serif;
@@ -55,6 +54,9 @@ aligning
             font-family: "Work+Sans", "Helvetica", sans-serif;
         }
 
+        /*
+        Contacts for feedback
+         */
         .contacts {
             display: flex;
             flex-direction: row;
@@ -83,11 +85,12 @@ Media query with style rules for good looking on other devices
 @media screen and (max-width: 800px) {
     .container {
         flex-direction: column-reverse;
+        align-items: center;
 
         .logo {
             display: flex;
             justify-content: center;
-            width: 100%;
+            width: 50%;
 
             img {
                 width: 80%;
