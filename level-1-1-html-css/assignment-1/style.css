@@ -23,6 +23,7 @@ aligning
     Block with a image.
     Set the size of the block and an image
      */
+
     .logo {
         width: 30%;
         min-width: 300px;
@@ -39,6 +40,7 @@ aligning
     Flex item with the text.
     Set direction and fonts for a text
      */
+
     .text {
         display: flex;
         flex-direction: column;
@@ -53,9 +55,25 @@ aligning
             font-family: "Work+Sans", "Helvetica", sans-serif;
         }
 
-        address {
-            font-size: 16px;
+        .contacts {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
         }
+
+        .contacts .social {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+        .contacts img {
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+        }
+
     }
 }
 

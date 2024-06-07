@@ -547,7 +547,7 @@ body {
     .news hr {
         margin-top: 0;
         margin-bottom: 0;
-        background-color: rgba(43, 64, 116, 1);
+        background-color: var(--bg-color);
         height: 8px;
         width: 100px;
 
@@ -620,7 +620,7 @@ body {
             left: 0;
             width: 95%;
             height: 95%;
-            border: 10px solid rgba(43, 64, 116, 1);
+            border: 10px solid var(--bg-color);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -636,7 +636,7 @@ body {
             bottom: 21px;
             width: 100%;
             border-radius: unset;
-            background-color: rgba(43, 64, 116, 1);
+            background-color: var(--bg-color);
         }
 
         .news_text p {
@@ -644,4 +644,210 @@ body {
         }
     }
 
+    .quotes {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        text-align: center;
+    }
+    .quotes_icon {
+        margin-top: 100px;
+        margin-bottom: 30px;
+    }
+
+    .quotes_text {
+        margin-top: 0;
+    }
+
+    .quotes_text p {
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 42px;
+        color: rgba(74, 74, 74, 1);
+    }
+
+    .quotes_text span {
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 42px;
+        color: var(--bg-color);
+    }
+
+    .quotes_text footer{
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 2px;
+        color: rgba(74, 74, 74, 1);
+    }
+
+    .quotes_pagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 80px 0 ;
+    }
+
+    .quotes_pagination .no-active {
+        background-color: var(--bg-color);
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        margin: 1px 5px 0 5px;
+    }
+
+    .quotes_pagination .active {
+        border: 1px solid rgba(71, 110, 77, 1);
+        border-left: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        margin: 0 5px;
+    }
+
+    .container_for_footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contacts {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 47px;
+        background-color: var(--bg-color);
+        color: white;
+        width: 100%;
+    }
+
+    .footer_logo-company {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        background: var(--bg-color);
+        height: 60px;
+        width: 230px;
+        top: -30px;
+        border-radius: 5px;
+    }
+
+    .contacts_text {
+        align-self: start;
+        margin: 158px 0 80px 150px;
+        font-family: "Roboto", "Times New Roman", monospace;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: 2px;
+    }
+
+    .contacts_info {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        margin: 0 150px 80px 150px;
+        width: 79%;
+
+    }
+
+    .contacts_info_column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        min-width: 200px;
+        flex: 1;
+
+    }
+
+    .contacts_social_links {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 61px;
+        width: 100%;
+        border-top: 1px solid rgba(126, 191, 132, 1);
+        border-bottom: 1px solid rgba(126, 191, 132, 1);
+        border-right: 1px solid rgba(126, 191, 132, 1);
+        margin-bottom: 80px;
+    }
+
+    #last_link {
+       border-right: unset;
+    }
+
+    .contacts_info_text h1 {
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 2px;
+        color: rgba(249, 246, 229, 1);
+    }
+
+    .contacts_info_text {
+        text-align: left;
+        font-family: "Roboto", "Times New Roman", monospace;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .contacts_info_text p {
+        font-style: normal;
+    }
+
+    .contacts_info_text a:link, .contacts_info_text a:visited {
+        text-decoration: none;
+        color: white;
+    }
+
+    .contacts_info_text a:hover, .contacts_info_text a:active {
+        color: #797979;
+    }
+
+    .back-to-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        width: 100%;
+        background-color: rgba(249, 246, 229, 1);
+
+    }
+
+    .back-to-top_button {
+        position: relative;
+        display: flex;
+        justify-content: start;
+        align-items: end;
+        height: 24px;
+        width: 99px;
+        margin: 7px 156px 11px 0;
+    }
+
+    .back-to-top_button a:link, .back-to-top_button a:visited {
+        color: rgba(74, 74, 74, 1);
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 2px;
+        text-decoration: none;
+    }
+
+    .back-to-top_arrow {
+        position: absolute;
+        right: -10px;
+
+    }
 }
