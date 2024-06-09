@@ -19,10 +19,17 @@ body {
 
         .navigation_logo {
             display: flex;
-            margin-left: 153px;
+            margin-left: 11%;
             margin-top: 17px;
             margin-bottom: 17px;
             width: auto;
+        }
+
+        .navigation_button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 9%;
         }
 
         .navigation_button button {
@@ -30,7 +37,6 @@ body {
             align-items: center;
             justify-content: center;
             background-color: #ffffff;
-            margin: 30px 135px 30px 0;
             border-radius: 5px;
             width: 40px;
             height: 40px;
@@ -1073,6 +1079,12 @@ body {
 }
 
 @media screen and (max-width: 480px) {
+
+    .container .intro h1 {
+        font-family: "Roboto Condensed", "Times New Roman", monospace;
+        font-size: 28px;
+        line-height: 28px;
+    }
 
     .container .read-more {
         display: none;
