@@ -994,14 +994,19 @@ body {
 
     .container .first_row {
         flex-direction: column;
+        width: 100%;
     }
 
     .container .second_row {
         flex-direction: column;
+        width: 100%;
     }
 
     .first_row .services_grid_cell {
         border-left: none;
+    }
+    .container .services_grid_cell {
+        width: auto;
     }
 
     .services_grid_cell.first_cell {
@@ -1161,6 +1166,10 @@ body {
         line-height: 24px;
     }
 
+    .container .promo_button {
+        margin-right: 0;
+    }
+
     .container .pagination_buttons {
         display: none;
     }
@@ -1188,6 +1197,8 @@ body {
 
     .container .services_grid_cell {
         border: 1px solid #F9F6E5;
+        margin-right: 20px;
+        margin-left: 20px;
     }
 
     .container .projects h1 {
@@ -1223,32 +1234,84 @@ body {
     }
 
     .container .video_description {
-        margin: 40px 20px 29px 20px;
+        margin: 40px 20px 0 20px;
+    }
+
+    .container .video_description h1 {
+        font-size: 24px;
+        line-height: 38px;
+    }
+
+    .container .video_description hr {
+        width: 45px;
+        height: 8px;
+    }
+
+    .container .video_description p {
+        font-size: 16px;
+        line-height: 18px;
     }
 
     .container .video {
         margin-bottom: 0;
     }
 
-    .container .video_image {
-
+    .container .video_image img {
+        width: 85%;
     }
 
     .container .video_button {
         margin-bottom: 40px;
     }
 
+    .container .news h1 {
+        font-size: 24px;
+        line-height: 38px;
+        margin: 40px 0 20px 0;
+    }
+
+    .container .news hr {
+        width: 50px;
+        height: 8px;
+        margin: 0;
+    }
+
     .container .news_mansory {
         column-count: 1;
-        margin: 40px 20px;
+        margin: 25px 20px;
     }
 
     .container .quotes_icon {
-        margin-top: 60px;
+        margin: 60px 0 0 0;
+    }
+
+    .container .quotes_text p {
+        font-size: 24px;
+        line-height: 18px;
+        margin: 80px 0;
+    }
+
+    .container .quotes_text span {
+        font-size: 24px;
+        line-height: 18px;
+    }
+
+    .container .quotes_text blockquote {
+        margin: 20px;
     }
 
     .container .quotes_pagination {
-        margin: 40px 0;
+        margin: 20px 0 40px 0;
+    }
+
+    .container .quotes_text footer {
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    .container .contacts_heading {
+        font-size: 20px;
+        line-height: 22px;
     }
 
     .container .contacts_social_links {
@@ -1265,6 +1328,10 @@ body {
 
     .container #last_link {
         margin-bottom: 0;
+    }
+
+    .container #google {
+        margin-left: 10px;
     }
 
     .container .contacts_heading {
