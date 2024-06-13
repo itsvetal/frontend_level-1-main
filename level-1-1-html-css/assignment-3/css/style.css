@@ -937,14 +937,23 @@ body {
 
     .container .services_grid {
         flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
     }
 
     .container .first_row {
         flex-direction: column;
+        width: 100%;
     }
 
     .container .second_row {
         flex-direction: column;
+        width: 100%;
+    }
+
+    .container .services_grid_cell {
+        width: 100%;
     }
 
     .first_row .services_grid_cell {
