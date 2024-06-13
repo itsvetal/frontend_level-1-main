@@ -191,7 +191,7 @@ body {
 
     }
 
-    .promo_text h1 {
+    .promo_text h2 {
         margin-bottom: 0;
         font-family: "Roboto", "Times New Roman", monospace;
         font-weight: 500;
@@ -248,7 +248,7 @@ body {
 
     }
 
-    .services_text h1 {
+    .services_text h2 {
         margin-top: 90px;
         font-family: "Roboto Condensed", "Times New Roman", monospace;
         color: var(--bg-color);
@@ -402,7 +402,7 @@ body {
 
     }
 
-    .projects h1 {
+    .projects h2 {
         margin-top: 80px;
         margin-bottom: 0;
         font-family: "Roboto Condensed", "Times New Roman", monospace;
@@ -510,7 +510,7 @@ body {
         margin-right: 16%;
     }
 
-    .video_description h1 {
+    .video_description h2 {
         font-family: "Roboto Condensed", "Times New Roman", monospace;
         font-weight: 400;
         font-size: 48px;
@@ -568,7 +568,7 @@ body {
         background-color: rgba(249, 246, 229, 1);
     }
 
-    .news h1 {
+    .news h2 {
         margin-top: 52px;
         margin-bottom: 19px;
         font-family: "Roboto Condensed", "Times New Roman", monospace;
@@ -829,7 +829,7 @@ body {
 
     }
 
-    .contacts_info_column h1 {
+    .contacts_info_column h2 {
         font-family: "Roboto Condensed", "Times New Roman", monospace;
         font-weight: 700;
         font-size: 16px;
@@ -1162,7 +1162,7 @@ body {
         margin: 20px;
     }
 
-    .container .promo_text h1 {
+    .container .promo_text h2 {
         line-height: 24px;
     }
 
@@ -1201,7 +1201,7 @@ body {
         margin-left: 20px;
     }
 
-    .container .projects h1 {
+    .container .projects h2 {
         font-size: 24px;
         line-height: 18px;
         margin-bottom: 69px;
@@ -1237,7 +1237,7 @@ body {
         margin: 40px 20px 0 20px;
     }
 
-    .container .video_description h1 {
+    .container .video_description h2 {
         font-size: 24px;
         line-height: 38px;
     }
@@ -1264,7 +1264,7 @@ body {
         margin-bottom: 40px;
     }
 
-    .container .news h1 {
+    .container .news h2 {
         font-size: 24px;
         line-height: 38px;
         margin: 40px 0 20px 0;
@@ -1374,5 +1374,4 @@ body {
         margin-top: 20px;
 
     }
-
 }
