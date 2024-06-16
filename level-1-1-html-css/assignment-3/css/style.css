@@ -673,11 +673,12 @@ body {
         display: none;
     }
 
-    .owl-dots button.owl-dot {
+    .quotes .owl-dots button.owl-dot {
         background-color: var(--bg-color);
     }
 
-    .owl-dots button.owl-dot.active {
+    .quotes .owl-dots button.owl-dot.active {
+        background-color: transparent;
         border: 1px solid var(--bg-color);
     }
 
@@ -1115,6 +1116,10 @@ body {
         left: unset;
         bottom: unset;
         margin: 55px 205px;
+    }
+
+    .container .contacts_heading {
+        margin-left: 53px;
     }
 }
 
