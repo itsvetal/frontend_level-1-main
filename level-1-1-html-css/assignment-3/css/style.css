@@ -129,7 +129,6 @@ body {
         right: calc(50% - 30px);
         justify-content: space-between;
         margin: 5px;
-
     }
 
     .owl-dots button.owl-dot {
@@ -147,29 +146,6 @@ body {
         border: 1px solid white;
         background-color: transparent;
         margin: 5px;
-    }
-
-    .intro_pagination .no-active {
-        width: 10px;
-        height: 10px;
-        margin-top: 1px;
-        border-radius: 50px;
-        background-color: white;
-    }
-
-    .intro_pagination .active {
-        width: 10px;
-        height: 10px;
-        border-radius: 50px;
-        border: 1px solid white;
-    }
-
-    .pagination_buttons {
-        display: block;
-        position: absolute;
-        flex-direction: column;
-        right: 0;
-        top: 264px;
     }
 
     .owl-nav {
@@ -199,7 +175,6 @@ body {
         background-color: var(--bg-color);
     }
 
-
     .promo {
         display: flex;
         justify-content: space-between;
@@ -210,7 +185,6 @@ body {
     .promo_text {
         margin-left: 11%;
         color: #ffffff;
-
     }
 
     .promo_text h2 {
@@ -249,7 +223,6 @@ body {
         font-weight: 500;
         font-size: 18px;
         line-height: 18px;
-
     }
 
     .promo_button a:hover, .promo_button a:active {
@@ -267,7 +240,6 @@ body {
         display: flex;
         flex-direction: column;
         margin-left: 62px;
-
     }
 
     .services_text h2 {
@@ -318,10 +290,6 @@ body {
         flex-direction: row;
     }
 
-    /*
-    Grid without focus
-     */
-
     .services_grid_cell {
         display: flex;
         flex-direction: column;
@@ -332,7 +300,6 @@ body {
         border-right: none;
         width: 242px;
         height: 278px;
-
     }
 
     .services_grid_cell img {
@@ -357,10 +324,6 @@ body {
     .grid_hover a:link, .grid_hover a:visited {
         display: none;
     }
-
-    /*
-    Hover effect on the grid cell
-     */
 
     .services_grid_cell:hover {
         .grid_hover {
@@ -414,7 +377,6 @@ body {
         }
     }
 
-
     .projects {
         display: flex;
         flex-direction: column;
@@ -422,7 +384,6 @@ body {
         align-items: center;
         background-image: linear-gradient(var(--bg-color), transparent);
         color: #ffffff;
-
     }
 
     .projects h2 {
@@ -432,7 +393,6 @@ body {
         font-weight: 400;
         font-size: 48px;
         line-height: 56px;
-
     }
 
     .projects hr {
@@ -607,7 +567,6 @@ body {
         background-color: var(--bg-color);
         height: 8px;
         width: 100px;
-
     }
 
     .news_mansory {
@@ -628,7 +587,6 @@ body {
     .news_image {
         display: block;
         position: relative;
-
     }
 
     .news_image img {
@@ -646,7 +604,6 @@ body {
         width: 100%;
         border-radius: 0 0 5px 5px;
         background-color: rgba(255, 255, 255, 1);
-
     }
 
     .news_text p {
@@ -835,7 +792,6 @@ body {
         align-items: start;
         margin: 0 150px 80px 150px;
         width: 79%;
-
     }
 
     .contacts_info_column {
@@ -845,7 +801,6 @@ body {
         align-items: start;
         min-width: 100px;
         flex: 1;
-
     }
 
     .contacts_info_column h2 {
@@ -884,7 +839,6 @@ body {
         justify-content: end;
         width: 100%;
         background-color: rgba(249, 246, 229, 1);
-
     }
 
     .back-to-top_button {
@@ -910,7 +864,6 @@ body {
     .back-to-top_arrow {
         position: absolute;
         right: -10px;
-
     }
 }
 
@@ -1159,7 +1112,6 @@ body {
         bottom: unset;
         margin: 55px 205px;
     }
-
 }
 
 @media screen and (max-width: 480px) {
