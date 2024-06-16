@@ -49,7 +49,7 @@ body {
         }
     }
 
-    .intro {
+    .item {
         display: flex;
         position: relative;
         flex-direction: column;
@@ -83,7 +83,7 @@ body {
         margin-bottom: 0;
     }
 
-    .intro hr {
+    .item hr {
         display: none;
         width: 61px;
         height: 8px;
@@ -107,7 +107,7 @@ body {
         border-radius: 5px;
         color: white;
         text-decoration: none;
-        margin-top: 28px;
+        margin: 28px 0 213px 0;
         background: var(--bg-color);
         height: 50px;
         width: 200px;
@@ -122,12 +122,31 @@ body {
         cursor: pointer;
     }
 
-    .intro_pagination {
+    .owl-dots {
         display: flex;
+        position: absolute;
+        bottom: 78px;
+        right: calc(50% - 30px);
         justify-content: space-between;
-        margin: 123px 0 38px 0;
-        height: 12px;
-        width: 50px;
+        margin: 5px;
+
+    }
+
+    .owl-dots button.owl-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        background-color: white;
+        margin: 5px;
+    }
+
+    .owl-dots button.owl-dot.active {
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        border: 1px solid white;
+        background-color: transparent;
+        margin: 5px;
     }
 
     .intro_pagination .no-active {
@@ -153,28 +172,31 @@ body {
         top: 264px;
     }
 
-    .pagination_back {
+    .owl-nav {
+        position: absolute;
+        top: calc(50% - 70px);
+        right: 0;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--bg-color);
-        cursor: pointer;
+        flex-direction: column;
     }
 
-    .pagination_forward {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .owl-nav button {
+        width: 70px;
+        height: 70px;
+    }
+
+    .owl-carousel .owl-nav button.owl-next {
+        background-image: url("../images/icons/forward.png");
+        background-position: center;
+        background-repeat: no-repeat;
         background-color: #F9F6E5;
-        cursor: pointer;
     }
 
-    .pagination_forward img {
-        margin: 22px;
-    }
-
-    .pagination_back img {
-        margin: 22px;
+    .owl-carousel .owl-nav button.owl-prev {
+        background-image: url("../images/icons/back.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: var(--bg-color);
     }
 
 
@@ -283,6 +305,7 @@ body {
     .services_grid {
         display: flex;
         flex-direction: column;
+        max-width: 68%;
     }
 
     .first_row {
@@ -437,8 +460,8 @@ body {
     }
 
     .project_image img {
-        -webkit-mask-image: url(../images/mask.png);
-        mask-image: url(../images/mask.png);
+        -webkit-mask-image: url(../images/icons/mask.png);
+        mask-image: url(../images/icons/mask.png);
         -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
     }
@@ -592,6 +615,7 @@ body {
         margin-bottom: 80px;
         column-count: 4;
         column-gap: 0;
+        width: 90%;
     }
 
     .news_content {
@@ -920,7 +944,7 @@ body {
         display: none;
     }
 
-    .container .services h1 {
+    .container .services h2 {
         text-align: center;
     }
 
@@ -981,7 +1005,7 @@ body {
         display: none;
     }
 
-    .container .services h1 {
+    .container .services h2 {
         text-align: center;
     }
 
@@ -1049,7 +1073,7 @@ body {
 
 @media screen and (max-width: 640px) {
 
-    .container .intro hr {
+    .container .item hr {
         display: flex;
         margin: 0;
     }
@@ -1085,16 +1109,17 @@ body {
     .container .projects_portfolio {
         display: flex;
         flex-direction: column;
-        margin-left: 30px;
+        margin: 80px 0;
+        width: 80%;
     }
 
     .container .project_image .overlay {
-        top: 35px;
-        left: 40px;
+        top: 10%;
+        left: 10%;
     }
 
     .container .project_content {
-        width: 150%;
+        width: 100%;
         align-items: stretch;
         text-align: center;
     }
@@ -1144,17 +1169,26 @@ body {
 
 @media screen and (max-width: 480px) {
 
-    .container .intro h1 {
+    .container .owl-carousel h1 {
         font-size: 28px;
         line-height: 28px;
         margin: 36px 0 20px 0;
     }
 
-    .container .intro_pagination {
-        margin: 19px 0 20px 0;
+    .container .owl-dots {
+        bottom: 15px;
+    }
+
+    .container .owl-carousel hr {
+        margin-top: 0;
+        margin-bottom: 65px;
     }
 
     .container .read-more {
+        display: none;
+    }
+
+    .container .owl-nav {
         display: none;
     }
 
@@ -1178,7 +1212,7 @@ body {
         flex-direction: column;
     }
 
-    .container .services h1 {
+    .container .services h2 {
         margin: 25px 0 20px 0;
         font-size: 24px;
         line-height: 28px;
