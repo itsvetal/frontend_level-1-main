@@ -638,7 +638,6 @@ body {
             width: 95%;
             height: 95%;
             border: 10px solid var(--bg-color);
-            transition: border 0.3s;
         }
 
         .news_text {
@@ -660,6 +659,26 @@ body {
         justify-content: start;
         align-items: center;
         text-align: center;
+    }
+
+    .quotes blockquote {
+        margin-bottom: 170px;
+    }
+
+    .quotes .owl-dots {
+        bottom: 80px;
+    }
+
+    .quotes .owl-nav button {
+        display: none;
+    }
+
+    .owl-dots button.owl-dot {
+        background-color: var(--bg-color);
+    }
+
+    .owl-dots button.owl-dot.active {
+        border: 1px solid var(--bg-color);
     }
 
     .quotes_icon {
@@ -694,30 +713,6 @@ body {
         line-height: 28px;
         letter-spacing: 2px;
         color: rgba(74, 74, 74, 1);
-    }
-
-    .quotes_pagination {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin: 80px 0;
-    }
-
-    .quotes_pagination .no-active {
-        background-color: var(--bg-color);
-        width: 10px;
-        height: 10px;
-        border-radius: 50px;
-        margin: 1px 5px 0 5px;
-    }
-
-    .quotes_pagination .active {
-        border: 1px solid rgba(71, 110, 77, 1);
-        border-left: none;
-        width: 10px;
-        height: 10px;
-        border-radius: 50px;
-        margin: 0 5px;
     }
 
     .container_for_footer {
@@ -869,12 +864,16 @@ body {
 
 @media screen and (max-width: 1024px) {
 
-    .container .intro_pagination .no-active {
+    .container .intro_h1 {
+        font-size: 84px;
+        line-height: 84px;
+    }
+
+    .container .owl-dots button.owl-dot {
         background-color: var(--bg-color);
     }
 
-    .container .intro_pagination .active {
-        background-color: transparent;
+    .container .owl-dots button.owl-dot.active {
         border-color: #476E4D;
     }
 
@@ -934,6 +933,11 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+
+    .container .intro_h1 {
+        font-size: 60px;
+        line-height: 60px;
+    }
 
     .container .intro_text p {
         display: none;
@@ -1266,24 +1270,25 @@ body {
         margin: 60px 0 0 0;
     }
 
+    .container .quotes .owl-dots {
+        bottom: 30px;
+    }
+
     .container .quotes_text p {
         font-size: 24px;
-        line-height: 18px;
+        line-height: 28px;
         margin: 80px 0;
     }
 
     .container .quotes_text span {
         font-size: 24px;
-        line-height: 18px;
+        line-height: 28px;
     }
 
     .container .quotes_text blockquote {
-        margin: 20px;
+        margin: 90px 20px;
     }
 
-    .container .quotes_pagination {
-        margin: 20px 0 40px 0;
-    }
 
     .container .quotes_text footer {
         font-size: 20px;
@@ -1293,13 +1298,15 @@ body {
     .container .contacts_heading {
         font-size: 20px;
         line-height: 22px;
+        margin: 60px 20px;
+        text-align: center;
     }
 
     .container .contacts_social_links {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        margin: 22px 0;
+        margin: 0;
     }
 
     .container .link {
@@ -1313,11 +1320,6 @@ body {
 
     .container #google {
         margin-left: 10px;
-    }
-
-    .container .contacts_heading {
-        margin: 60px 0 0 0;
-        text-align: center;
     }
 
     .container .contacts_info {
