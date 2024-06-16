@@ -628,7 +628,8 @@ body {
         flex-direction: column;
         justify-content: start;
         align-items: stretch;
-
+        break-inside: avoid;
+        padding: 15px;
     }
 
     .news_blog img {
@@ -661,16 +662,9 @@ body {
         letter-spacing: 2px;
     }
 
-    .news_content:hover {
-
-        .news_blog {
+    .news_blog:hover {
             position: relative;
-            display: inline-block;
-        }
-
-        .news_blog img {
-            width: 100%;
-        }
+            display: block;
 
         .news_overlay {
             position: absolute;
