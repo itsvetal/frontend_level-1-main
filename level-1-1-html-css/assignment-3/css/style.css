@@ -83,7 +83,7 @@ body {
         margin-bottom: 0;
     }
 
-    .item hr {
+    .intro_hr hr {
         display: none;
         width: 61px;
         height: 8px;
@@ -126,7 +126,7 @@ body {
         display: flex;
         position: absolute;
         bottom: 78px;
-        right: calc(50% - 30px);
+        right: calc(50% - 35px);
         justify-content: space-between;
         margin: 5px;
     }
@@ -1026,12 +1026,32 @@ body {
 
 @media screen and (max-width: 640px) {
 
-    .container .item hr {
-        display: flex;
-        margin: 0;
+    .container .intro {
+        position: relative;
     }
 
-    .container .promo {
+    .container .intro_h1 {
+        margin-top: 50px;
+    }
+
+    .container .intro_hr hr {
+        display: block;
+        position: absolute;
+        top: calc(50% - 10px);
+        right: calc(50% - 31px);
+        margin: 0;
+        z-index: 2;
+    }
+
+    .container .read-more a:link, .read-more a:visited {
+        margin-bottom: 113px;
+    }
+
+    .container .owl-dots {
+        bottom: 50px;
+    }
+
+        .container .promo {
         flex-direction: column;
     }
 
@@ -1128,16 +1148,15 @@ body {
     .container .owl-carousel h1 {
         font-size: 28px;
         line-height: 28px;
-        margin: 36px 0 20px 0;
+        margin: 36px 0 73px 0;
     }
 
     .container .owl-dots {
-        bottom: 15px;
+        bottom: 5px;
     }
 
-    .container .owl-carousel hr {
-        margin-top: 0;
-        margin-bottom: 65px;
+    .container .intro_hr hr {
+        top: 120px;
     }
 
     .container .read-more {
