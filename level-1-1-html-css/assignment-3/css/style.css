@@ -445,6 +445,7 @@ body {
 
     .project_image img {
         width: 100%;
+        border-radius: 5px;
     }
 
     .project_image .overlay {
@@ -1231,27 +1232,6 @@ body {
 
     .container .projects hr {
         display: none;
-    }
-
-    .container .projects_portfolio {
-        display: contents;
-    }
-
-    .container .project_content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        width: 100%;
-    }
-
-    .container .project_image .overlay {
-        top: 22px;
-        left: 25px;
-    }
-
-    .container .project_image img {
-        width: unset;
     }
 
     .container .video_description {
