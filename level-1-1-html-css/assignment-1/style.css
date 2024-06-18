@@ -1,82 +1,177 @@
-/**
-Use flex and justify-content for placement of blocks at the center
- */
+
 body {
     display: flex;
     justify-content: center;
+    margin: 0;
+    color: #793700;
+    font-family: "Source Code Pro", "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-/**
-Create flex container for two items flex description and block logo.
- */
+
 .container {
     display: flex;
-    justify-content: space-around;
-    background-color: #FFF3F0;
-    max-width: 1600px;
+    flex-direction: column;
+    background-image: linear-gradient(#b3b3b3, transparent);
+    width: 100%;
+    max-width: 1440px;
     text-align: justify;
 
-    /**
-    Block with a image.
-     */
+    .nav {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 50px;
+    }
 
-    .logo {
-        width: 20%;
-        margin-top: 20px;
-        min-width: 300px;
+    .nav_text {
+        color: white;
+    }
 
-        img {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
+    .nav h1 {
+        font-family: "Merriweather", "Times New Roman", serif;
+        font-style: normal;
+        font-size: 56px;
+        font-weight: 400;
+        line-height: 48px;
+    }
+
+    .nav p {
+        font-family: "Work+Sans", "Helvetica", sans-serif;
+        font-size: 30px;
+        line-height: 30px;
+        font-weight: 400;
+    }
+
+    span {
+        font-family: "Source Code Pro", "Times New Roman", serif;
+        font-size: 18px;
+        font-weight: 500;
+        font-style: italic;
+    }
+
+    .portfolio {
+        display: block;
+        position: relative;
+        width: 130px;
+    }
+
+    .portfolio_btn {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .click_me {
+        position: absolute;
+        bottom: -35px;
+    }
+
+    .click_me p {
+        position: absolute;
+        margin: 0;
+        width: 100px;
+        color: black;
+        font-family: "LXGW WenKai Mono TC", "Times New Roman", serif;
+        font-size: 16px;
+        bottom: -16px;
+
+    }
+
+    .portfolio_btn img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .portfolio_btn button {
+        width: 100%;
+        height: 40px;
+        background-color: #44E34E;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .portfolio_btn button:hover {
+        background-color: rgba(68, 227, 79, 0.5);
+        border-radius: 5px 5px 0 0;
+
+        .click_me {
+            display: none;
         }
     }
 
-    /**
-    Flex item with the text.
-    Set direction and fonts for a text
-     */
+    .portfolio:hover .dropdown_content {
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown_content {
+        display: none;
+        position: absolute;
+        bottom: -40px;
+        background-color: #f9f9f9;
+        box-shadow: 0 8px 16px 0 rgba(0,255,0,0.2);
+        border-radius: 0 0 5px 5px;
+        width: 130px;
+        height: 40px;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .dropdown_content a {
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+    }
+
+    section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
     .text {
         display: flex;
         flex-direction: column;
         justify-content: start;
         align-items: start;
-
-
-        h1 {
-            font-family: "Merriweather", "Times New Roman", serif;
-            font-style: normal;
-        }
-
-        p {
-            font-family: "Work+Sans", "Helvetica", sans-serif;
-        }
-
-        /*
-        Contacts for feedback
-         */
-        .contacts {
-            display: flex;
-            flex-direction: row;
-            justify-content: start;
-        }
-
-        .contacts .social {
-            display: flex;
-            justify-content: center;
-
-
-        }
-
-        .contacts img {
-            width: 30px;
-            height: 30px;
-            margin: 10px;
-        }
-
+        width: 50%;
+        margin: 50px 20px;
     }
+
+    .logo {
+        width: 30%;
+        margin: 90px 10%;
+        min-width: 300px;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    }
+
+    .contacts {
+        display: flex;
+        flex-direction: row;
+        margin-left: 20px;
+    }
+
+    .contacts .social {
+        display: flex;
+        justify-content: center;
+    }
+
+    .contacts img {
+        width: 30px;
+        height: 30px;
+        margin: 10px;
+    }
+
+
 }
 
 /**
@@ -84,20 +179,32 @@ Media query with style rules for good looking on other devices
  */
 @media screen and (max-width: 800px) {
     .container {
-        flex-direction: column-reverse;
         align-items: center;
 
-        .logo {
-            display: flex;
-            justify-content: center;
-            width: 50%;
+        .nav_text {
+            text-align: center;
+        }
 
-            img {
-                width: 80%;
-            }
+        .portfolio {
+            align-self: center;
+        }
+
+        section {
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+
+        .logo {
+            margin: 30px 5px;
         }
 
         .text {
+            width: unset;
+            margin: 0 20px;
+        }
+
+        .contacts {
+            flex-direction: column;
             margin: 0;
         }
     }

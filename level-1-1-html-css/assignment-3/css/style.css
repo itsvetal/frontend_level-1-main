@@ -394,7 +394,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-image: linear-gradient(var(--bg-color), transparent);
+        background: linear-gradient(var(--bg-color), transparent);
         color: #ffffff;
     }
 
