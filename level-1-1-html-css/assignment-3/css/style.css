@@ -645,13 +645,8 @@ body {
 
     .news_overlay {
         position: absolute;
-        top: 0;
-        width: 90%;
-        height: 95%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        top: 50%;
+        left: calc(50% - 14px);
         opacity: 0;
         transition: opacity 0.3s ease;
     }
@@ -675,10 +670,10 @@ body {
     }
 
     .news_blog:hover {
-
         .news_overlay {
             opacity: 1;
             transition: opacity 2s;
+            z-index: 1;
         }
 
         .news_text {
