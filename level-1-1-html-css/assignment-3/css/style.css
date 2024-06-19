@@ -470,7 +470,7 @@ body {
         margin: 0 5px;
     }
 
-    .project_content:hover {
+    .project_content:hover, .project_content:active {
         .project_image .overlay {
             opacity: 1;
             transition: opacity linear 0.2s;
@@ -664,12 +664,12 @@ body {
         z-index: 1;
     }
 
-    .news_image:hover::before {
+    .news_image:hover::before, .news_image:active::before {
         opacity: 1;
         transition: opacity 0.3s;
     }
 
-    .news_blog:hover {
+    .news_blog:hover, .news_blog:active {
         .news_overlay {
             opacity: 1;
             transition: opacity 2s;
