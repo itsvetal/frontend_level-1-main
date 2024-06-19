@@ -477,12 +477,12 @@ body {
         }
 
         .project_image .overlay a:first-child {
-            margin-left: 70px;
+            margin-left:calc(50% - 40px);
             transition: margin-left linear 0.3s;
         }
 
         .project_image .overlay a:last-child {
-            margin-right: 70px;
+            margin-right: calc(50% - 40px);
             transition: margin-right linear 0.3s;
         }
     }
