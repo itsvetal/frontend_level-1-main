@@ -345,11 +345,13 @@ body {
             width: 227px;
             height: 263px;
             border: 4px solid var(--bg-color);
+            transition: border linear 0.2s;
         }
 
         .grid_hover img {
             margin-top: 25px;
             margin-bottom: 16px;
+            transition: margin linear 0.2s;
         }
 
         .grid_text1 {
@@ -458,7 +460,7 @@ body {
         border-radius: 5px;
         opacity: 0;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -471,6 +473,17 @@ body {
     .project_content:hover {
         .project_image .overlay {
             opacity: 1;
+            transition: opacity linear 0.2s;
+        }
+
+        .project_image .overlay a:first-child {
+            margin-left: 70px;
+            transition: margin-left linear 0.3s;
+        }
+
+        .project_image .overlay a:last-child {
+            margin-right: 70px;
+            transition: margin-right linear 0.3s;
         }
     }
 
@@ -606,7 +619,6 @@ body {
         border-radius: 5px 5px 6px 6px;
         width: 100%;
         height: 100%;
-        transition: transform 0.3s ease;
     }
 
     .news_text {
@@ -659,12 +671,14 @@ body {
 
     .news_image:hover::before {
         opacity: 1;
+        transition: opacity 0.3s;
     }
 
     .news_blog:hover {
 
         .news_overlay {
             opacity: 1;
+            transition: opacity 2s;
         }
 
         .news_text {
@@ -673,6 +687,7 @@ body {
             width: 100%;
             border-radius: unset;
             background-color: var(--bg-color);
+            transition: bottom 0.3s linear;
         }
 
         .news_text p {
