@@ -342,7 +342,7 @@ body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 227px;
+            width: 90%;
             height: 263px;
             border: 4px solid var(--bg-color);
             transition: border linear 0.2s;
