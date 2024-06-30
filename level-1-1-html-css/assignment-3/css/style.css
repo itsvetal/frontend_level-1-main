@@ -172,7 +172,7 @@ body {
     }
 
     .owl-carousel .owl-nav button.owl-next {
-        background-image: url("../images/icons/forward.png");
+        background-image: url("../assets/icons/forward.png");
         background-position: center;
         background-repeat: no-repeat;
         background-color: #F9F6E5;
@@ -183,7 +183,7 @@ body {
     }
 
     .owl-carousel .owl-nav button.owl-prev {
-        background-image: url("../images/icons/back.png");
+        background-image: url("../assets/icons/back.png");
         background-position: center;
         background-repeat: no-repeat;
         background-color: var(--bg-color);
@@ -443,8 +443,8 @@ body {
     }
 
     .project_image img {
-        -webkit-mask-image: url(../images/icons/mask.png);
-        mask-image: url(../images/icons/mask.png);
+        -webkit-mask-image: url(../assets/icons/mask.png);
+        mask-image: url(../assets/icons/mask.png);
         -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
     }
