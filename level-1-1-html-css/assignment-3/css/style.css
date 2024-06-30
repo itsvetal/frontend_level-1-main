@@ -26,6 +26,7 @@ body {
     .navigation {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         background-color: var(--bg-color);
 
 
@@ -39,19 +40,13 @@ body {
 
         .navigation_button {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 9%;
-        }
-
-        .navigation_button button {
-            display: flex;
             align-items: center;
             justify-content: center;
             background-color: #ffffff;
             border-radius: 5px;
             width: 40px;
             height: 40px;
+            margin-right: 9%;
             cursor: pointer;
         }
 
@@ -112,24 +107,27 @@ body {
         line-height: 26px;
     }
 
-    .read-more a:link, .read-more a:visited {
+    .read-more {
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 5px;
-        color: white;
-        text-decoration: none;
-        margin: 28px 0 213px 0;
-        background: var(--bg-color);
         height: 50px;
         width: 200px;
+        border-radius: 5px;
+        margin: 28px 0 213px 0;
+        background: var(--bg-color);
+    }
+
+    .read-more span {
+        color: white;
+        text-decoration: none;
         font-family: "Roboto", sans-serif;
         font-weight: 400;
         font-size: 18px;
         line-height: 18px;
     }
 
-    .read-more a:hover, .read-more a:active {
+    .read-more:hover, .read-more:active {
         background-color: #274693;
         cursor: pointer;
     }
@@ -180,11 +178,19 @@ body {
         background-color: #F9F6E5;
     }
 
+    .owl-carousel .owl-nav button.owl-next:hover {
+        background-color: #FFF3AF;
+    }
+
     .owl-carousel .owl-nav button.owl-prev {
         background-image: url("../images/icons/back.png");
         background-position: center;
         background-repeat: no-repeat;
         background-color: var(--bg-color);
+    }
+
+    .owl-carousel .owl-nav button.owl-prev:hover {
+        background-color: #274693;
     }
 
     .promo {
@@ -217,27 +223,30 @@ body {
 
     .promo_button {
         margin-right: 9%;
-    }
-
-    .promo_button a:link, .promo_button a:visited {
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #F9F6E5;
         color: var(--bg-color);
-        text-decoration: none;
         border-radius: 5px;
         margin-top: 71px;
         margin-bottom: 71px;
         height: 50px;
         width: 200px;
+        cursor: pointer;
+
+    }
+
+    .promo_button span{
+        color: var(--bg-color);
+        text-decoration: none;
         font-family: "Roboto", "Times New Roman", sans-serif;
         font-weight: 500;
         font-size: 18px;
         line-height: 18px;
     }
 
-    .promo_button a:hover, .promo_button a:active {
+    .promo_button:hover, .promo_button:active {
         background-color: #FFF3AF;
     }
 
@@ -550,24 +559,28 @@ body {
         color: rgba(155, 155, 155, 1);
     }
 
-    .video_button a:link, .video_button a:visited {
-        margin-top: 39px;
+    .video_button {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 60px;
         width: 230px;
         border-radius: 5px;
+        margin-top: 39px;
+        background-color: var(--bg-color);
+        cursor: pointer;
+    }
+
+    .video_button span {
         text-decoration: none;
         color: rgba(249, 246, 229, 1);
-        background-color: var(--bg-color);
         font-family: "Roboto", "Times New Roman", monospace;
         font-weight: 500;
         font-size: 18px;
         line-height: 18px;
     }
 
-    .video_button a:hover, .video_button a:active {
+    .video_button:hover, .video_button:active {
         background-color: var(--bg-hover-color);
     }
 
@@ -688,11 +701,13 @@ body {
             width: 100%;
             border-radius: unset;
             background-color: var(--bg-color);
-            transition: bottom 0.3s linear;
+            transition: bottom 0.5s;
+
         }
 
         .news_text p {
             color: rgba(249, 246, 229, 1);
+            transition: color 1s;
         }
     }
 
@@ -877,32 +892,32 @@ body {
         flex-direction: row;
         justify-content: end;
         width: 100%;
+        height: 42px;
         background-color: rgba(249, 246, 229, 1);
     }
 
-    .back-to-top_button {
-        position: relative;
+    .back-to-top_text {
         display: flex;
-        justify-content: start;
-        align-items: end;
-        height: 24px;
-        width: 99px;
-        margin: 7px 156px 11px 0;
+        align-items: center;
     }
 
-    .back-to-top_button a:link, .back-to-top_button a:visited {
+    .back-to-top_text p {
         color: rgba(74, 74, 74, 1);
         font-family: "Roboto Condensed", "Times New Roman", monospace;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
         letter-spacing: 2px;
-        text-decoration: none;
     }
 
     .back-to-top_arrow {
-        position: absolute;
-        right: -10px;
+        margin-right: 146px;
+        border: none;
+        background-color: rgba(249, 246, 229, 1);
+    }
+
+    .back-to-top_arrow:hover {
+        background-color: #FFF3AF;
     }
 }
 
@@ -973,6 +988,10 @@ body {
 
     .container .news_mansory {
         column-count: 3;
+    }
+
+    .container .back-to-top_arrow {
+        margin-right: 15px;
     }
 }
 
@@ -1054,12 +1073,7 @@ body {
     .container .video_button {
         position: absolute;
         left: 273px;
-        bottom: -48px;
-    }
-
-
-    .container .video_button a:link, .container .video_button a:visited {
-        margin-top: 0;
+        bottom: -55px;
     }
 
     .container .news_mansory {
@@ -1086,7 +1100,7 @@ body {
         z-index: 2;
     }
 
-    .container .read-more a:link, .read-more a:visited {
+    .container .read-more {
         margin-bottom: 113px;
     }
 
@@ -1106,7 +1120,7 @@ body {
         text-align: center;
     }
 
-    .container .promo_button a:link, .container .promo_button a:visited {
+    .container .promo_button {
         margin: 20px 0 40px 0;
     }
 
@@ -1168,6 +1182,10 @@ body {
         flex-direction: column;
         align-items: center;
         text-align: center;
+    }
+
+    .container .video_description h2 {
+        margin-top: 40px;
     }
 
     .container .video_description hr {
@@ -1265,7 +1283,7 @@ body {
     }
 
     .container .video_description {
-        margin: 40px 20px 0 20px;
+        margin: 0 20px;
     }
 
     .container .video_description h2 {
@@ -1385,21 +1403,10 @@ body {
 
     .container .back-to-top {
         display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .container .back-to-top_button {
-        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         height: 142px;
-        margin: 0;
     }
 
-    .container .back-to-top_arrow {
-        position: unset;
-        margin-top: 20px;
-    }
 }
