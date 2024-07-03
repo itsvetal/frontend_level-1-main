@@ -2,9 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Assignment-1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<h1>Assignment 1</h1>
+
+<div class="task_1-2">
+    <h3>Task 1-2:</h3>
+    <div class="container_for_square">
+        <div id="square"></div>
+    </div>
+    <div class="task_1_buttons">
+        <button class="button_style" onclick="hideByCss()">Hide by CSS</button>
+        <button class="button_style" onclick="hideByJs()">Hide by JS</button>
+        <button class="button_style" onclick="hideByJsAndCss()">Hide by CSS+JS</button>
+        <button class="button_style" onclick="hideSquare()">Hide or Visible by CSS+JS</button>
+    </div>
+</div>
+
+<div class="task_3 task_style">
+    <h3>Task 3:</h3>
+    <div class="container_for_square">
+        <div class="black_square"></div>
+        <div class="black_square"></div>
+        <div class="black_square"></div>
+        <div class="black_square"></div>
+        <div class="black_square"></div>
+    </div>
+    <button class="button_style" onclick="hideFiveBlackSquares()">Click me</button>
+</div>
+
+<div class="task_4 task_style">
+    <h3>Task 4:</h3>
+    <form name="selectorsForm">
+        <label for="selector">Enter CSS selector</label><br>
+        <input type="text" name="selector" id="selector"><br>
+        <input class="button_style" type="button" onclick="hideBySelector()" value="Click to hide element">
+    </form>
+</div>
+
+<div class="task_5 task_style">
+    <h3>Task 5:</h3>
+    <div class="container_for_square">
+        <div id="yellow_square"></div>
+    </div>
+    <button class="button_style" id="for_yellow_square" onclick="showMessageForYellowSquare()">Click me</button>
+</div>
+
+<div class="task_6 task_style">
+    <h3>Task 6:</h3>
+    <div class="container_for_square">
+        <div id="red_square"></div>
+    </div>
+    <button class="button_style" onmouseover="showRedSquare()" onmouseout="hideRedSquare()">Point mouse at me</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
