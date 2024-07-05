@@ -64,7 +64,7 @@ h1 {
     background-color: #000;
 }
 
-.task_4 form  {
+#selectorsForm {
     display: flex;
     align-items: baseline;
     flex-direction: column;
@@ -72,7 +72,7 @@ h1 {
     width: 150px;
 }
 
-.task_4 form input {
+.task_4 input {
     margin-top: -15px;
 }
 
@@ -93,4 +93,28 @@ h1 {
     height: 50px;
     background-color: red;
     opacity: 0;
+}
+
+.task_7 .container_for_square {
+    height: 30px;
+}
+
+#green_rectangle {
+    display: flex;
+    width: 50px;
+    height: 20px;
+    background-color: green;
+    opacity: 0;
+}
+
+.task_8 form {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 150px;
+}
+
+.task_8 input {
+    margin-top: -15px;
 }

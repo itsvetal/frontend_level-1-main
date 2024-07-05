@@ -9,78 +9,84 @@ function hideByJs() {
 }
 
 function hideByJsAndCss() {
-    document.getElementById("square").setAttribute("class", "hidden");
+    document.getElementById("square").classList.add("hidden");
 }
 
 function hideSquare() {
     const element = document.querySelector("#square");
-    const classHidden = document.getElementsByClassName("hidden");
-    if (classHidden.length === 0) {
-        element.setAttribute("class", "hidden");
-    } else {
-        element.removeAttribute("class");
-    }
+    const isHidden = element.classList.contains("hidden");
+
+    !isHidden
+        ? element.classList.add("hidden")
+        : element.classList.remove("hidden");
 }
 
 function hideFiveBlackSquares() {
-    const numOfBlackSquares = 5;
-    const elemments = document.getElementsByClassName("black_square");
-    const hiddenElements = document.getElementsByClassName("hidden");
-    if (hiddenElements.length < numOfBlackSquares) {
-        hideElements(elemments)
-    } else if (hiddenElements.length >= numOfBlackSquares) {
-        showElements(elemments);
-    }
-}
+    const container = document.getElementById("task_3");
+    const elements = Array.from(container.getElementsByClassName("container_for_square")[0].children);
+    const isHidden = elements.every((e) => e.classList.contains("hidden"));
 
-function hideElements(elemments) {
-    for (const elemment of elemments) {
-        elemment.setAttribute("class", "black_square hidden");
-    }
-}
-
-function showElements(elemments) {
-    for (const elemment of elemments) {
-        elemment.setAttribute("class", "black_square");
-    }
+    elements.forEach((e) =>
+        isHidden
+            ? e.classList.remove("hidden")
+            : e.classList.add("hidden")
+    )
 }
 
 function hideBySelector() {
-    let value = document.forms["selectorsForm"]["selector"].value;
-    const elements = document.querySelectorAll(value);
-    if (elements.length === 0) {
-    } else {
-        for (const element of elements) {
-            if (element.style.display === "none") {
-                element.style.display = "";
-            } else {
-                element.style.display = "none";
-            }
-        }
+    const form = document.getElementById("selectorsForm");
+    const value = form.querySelector("#selector").value;
+
+    if (!value) {
+        alert("Please enter a selector");
+        return;
     }
+
+    const elements = document.querySelectorAll(value);
+
+    if (!elements.length) {
+        alert("No elements with given selector");
+        return;
+    }
+
+    elements.forEach((e) => e.style.display = e.style.display === "none" ? "" : "none")
 }
 
 function showMessageForYellowSquare() {
-    alert("Привіт");
-    const buttonAttributes = document.getElementById("for_yellow_square")
-        .attributes;
-    for (const attribute of buttonAttributes) {
-        if (attribute.name === "onclick") {
-            attribute.value = "hideYellowSquare()";
-        }
+    const element = document.getElementById("for_yellow_square");
+
+    if (!element.getAttribute("data-clicked")) {
+        element.setAttribute("data-clicked", '1');
+        alert("Привіт");
+    } else {
+        document.getElementById("yellow_square").classList.add("hidden");
     }
 }
 
-function hideYellowSquare() {
-    document.getElementById("yellow_square").setAttribute("class", "hidden");
+function setOpacity(id, value) {
+    document.getElementById(id).style.opacity = value;
 }
 
-function showRedSquare() {
-   const element = document.getElementById("red_square");
-   element.style.opacity = "1";
+function showImageByLink() {
+    const value = document.forms["task_8_form"]["task_8_input"].value;
+
+    if (!value) {
+        alert("Please enter a link");
+        return;
+    }
+
+    creatImg(createContainerForImg(), value);
 }
 
-function hideRedSquare() {
-    const element = document.getElementById("red_square");
-    element.style.opacity = "0";
+function createContainerForImg() {
+    const container = document.createElement("div");
+    document.getElementById("task_8").appendChild(container);
+    container.classList.add("task_8-img_container");
+    return container;
+}
+
+function creatImg(container, src) {
+    const image = document.createElement("img");
+    image.src = src;
+    container.appendChild(image);
 }

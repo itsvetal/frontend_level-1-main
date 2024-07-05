@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<div class="task_3 task_style">
+<div class="task_style" id="task_3">
     <h3>Task 3:</h3>
     <div class="container_for_square">
         <div class="black_square"></div>
@@ -37,11 +37,11 @@
 
 <div class="task_4 task_style">
     <h3>Task 4:</h3>
-    <form name="selectorsForm">
+    <div id="selectorsForm">
         <label for="selector">Enter CSS selector</label><br>
         <input type="text" name="selector" id="selector"><br>
-        <input class="button_style" type="button" onclick="hideBySelector()" value="Click to hide element">
-    </form>
+        <button class="button_style" onclick="hideBySelector()">Click to hide element</button>
+    </div>
 </div>
 
 <div class="task_5 task_style">
@@ -57,7 +57,30 @@
     <div class="container_for_square">
         <div id="red_square"></div>
     </div>
-    <button class="button_style" onmouseover="showRedSquare()" onmouseout="hideRedSquare()">Point mouse at me</button>
+    <button class="button_style" onmouseover="setOpacity('red_square', 1)" onmouseout="setOpacity('red_square', 0)">
+        Point mouse at me
+    </button>
+</div>
+
+<div class="task_7 task_style">
+    <h3>Task 7:</h3>
+    <div class="container_for_square">
+        <div id="green_rectangle"></div>
+    </div>
+    <form name="green_rect_form">
+        <label for="green_rect_input">Enter the text</label><br>
+        <input type="text" name="green_rect_input" id="green_rect_input" onfocus="setOpacity('green_rectangle', 1)"
+               oninput="setOpacity('green_rectangle', 0)">
+    </form>
+</div>
+
+<div class="task_8 task_style" id="task_8">
+    <h3>Task 8:</h3>
+    <form name="task_8_form">
+        <label for="task_8_input">Enter the link</label><br>
+        <input type="text" name="task_8_input" id="task_8_input"><br>
+        <input class="button_style" type="button" value="Submit" onclick="showImageByLink()">
+    </form>
 </div>
 
 <script src="script.js"></script>
