@@ -1,5 +1,19 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    background-color: #ffeddc;
+}
+
 h1 {
-    text-align: center;
+    margin-left: 20px;
 }
 
 .task_1-2 {
@@ -117,4 +131,69 @@ h1 {
 
 .task_8 input {
     margin-top: -15px;
+}
+
+.task_10 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    background-color: blue;
+}
+
+#coordinates {
+    color: white;
+}
+
+.task_11 {
+    position: absolute;
+    top: 58px;
+    right: 200px;
+    background-color: #FFFFFF;
+}
+
+#browser_lang {
+    margin: 12px 10px;
+}
+
+.task_12 {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    right: 200px;
+}
+
+.task_12 div {
+    display: flex;
+    align-items: center;
+}
+
+.task_12 div h3 {
+    margin-right: 10px;
+}
+
+.task_12 div p {
+    margin: 0 10px;
+}
+
+#position_container {
+    width: 316px;
+    background-color: #FFFFFF;
+}
+
+.task_13 {
+    display: flex;
+    flex-direction: column;
+}
+
+.task_13_input {
+    max-width: 153px;
+    margin-top: -15px;
+    border: 1px solid #000000;
+    background-color: #FFFFFF;
 }

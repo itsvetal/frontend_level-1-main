@@ -75,13 +75,13 @@ function showImageByLink() {
         return;
     }
 
-    creatImg(createContainerForImg(), value);
+    creatImg(createContainerForImg("task_8", "task_8-img_container"), value);
 }
 
-function createContainerForImg() {
+function createContainerForImg(task, img_container) {
     const container = document.createElement("div");
-    document.getElementById("task_8").appendChild(container);
-    container.classList.add("task_8-img_container");
+    document.getElementById(task).appendChild(container);
+    container.classList.add(img_container);
     return container;
 }
 
@@ -90,3 +90,47 @@ function creatImg(container, src) {
     image.src = src;
     container.appendChild(image);
 }
+
+function showImageFromTextArea() {
+    const value = document.forms["task_9_form"]["task_9_area"].value;
+    const lines = value.replace(/\r\n/g).split("\n");
+    console.log(lines.length);
+    lines.forEach(line => {
+        creatImg(createContainerForImg("task_9", "task_9-img_container"), line);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    //The coordinates of the cursor
+    document.body.addEventListener("mouseover", (event) => {
+        document.getElementById("coordinates").innerHTML = `X: ${event.pageX} Y: ${event.pageY}`;
+    });
+    //Information about browser's language
+    document.getElementById("browser_lang").innerHTML = `Browser lang: ${navigator.language.toUpperCase()}`;
+    //Geolocation of user
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        document.getElementById("position").innerHTML = "Geolocation is not supported in your browser.";
+    }
+    //Load from local storage
+    loadFromLocalStorage()
+});
+
+function showPosition(position) {
+    document.getElementById("position").innerHTML = `Latitude: ${position.coords.latitude}, Longitude:
+     ${position.coords.longitude}`;
+}
+
+function loadFromLocalStorage() {
+    document.getElementById("first_input").innerHTML = localStorage.getItem("input_1");
+}
+
+function saveData() {
+    const value = document.getElementById("first_input").innerHTML;
+    localStorage.setItem("input_1", value);
+}
+
+
+
+
