@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onscroll="checkTheBottom()">
 <div class="container" id="container">
 
-    <h1>Assignment 1</h1>
+    <h1 id="heading">Assignment 1</h1>
 
     <div class="task_1-2">
         <h3>Task 1-2:</h3>
@@ -111,19 +111,23 @@
     </div>
 
     <div class="task_13 task_style">
+        <h3>Task 13:</h3>
         <div class="task_13_block">
             <p>Enter the text:</p>
-            <p class="task_13_input" id="first_input" contenteditable="true" onblur="saveData()"></p>
+            <p class="task_13_input" id="first_input" contenteditable="true" onblur="saveToLocalStorage(id)"></p>
         </div>
         <div class="task_13_block">
             <p>Enter the text:</p>
-            <p class="task_13_input" contenteditable="true" onload="">Edit me!!!</p>
+            <p class="task_13_input" id="second_input" contenteditable="true" onblur="saveToCookies(id)"></p>
         </div>
         <div class="task_13_block">
             <p>Enter the text:</p>
-            <p class="task_13_input" contenteditable="true" onload="">Edit me!!!</p>
+            <p class="task_13_input" id="third_input" contenteditable="true" onblur="saveToSessionStorage(id)"></p>
         </div>
+    </div>
 
+    <div class="task_14" id="task_14">
+        <h3>Task 14:</h3>
     </div>
 
     <script src="script.js"></script>

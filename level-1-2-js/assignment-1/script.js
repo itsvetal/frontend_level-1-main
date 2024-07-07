@@ -115,6 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     //Load from local storage
     loadFromLocalStorage()
+    loadFromCookies();
+    loadFromSessionStorage()
 });
 
 function showPosition(position) {
@@ -122,15 +124,76 @@ function showPosition(position) {
      ${position.coords.longitude}`;
 }
 
-function loadFromLocalStorage() {
-    document.getElementById("first_input").innerHTML = localStorage.getItem("input_1");
-}
-
-function saveData() {
+function saveToLocalStorage(elementsId) {
+    const name = elementsId;
     const value = document.getElementById("first_input").innerHTML;
-    localStorage.setItem("input_1", value);
+    localStorage.setItem(name, value);
 }
 
+function loadFromLocalStorage() {
+    document.getElementById("first_input").innerHTML = localStorage.getItem("first_input");
+}
+
+function saveToCookies(elementsId) {
+    const cname = elementsId;
+    const cvalue = document.getElementById("second_input").innerHTML;
+    setCookie(cname, cvalue);
+}
+
+function setCookie(cname, value) {
+    document.cookie = cname + "=" + value + "; path=/";
+}
+
+function loadFromCookies() {
+    document.getElementById("second_input").innerHTML = getCookie("second_input");
+}
+
+function getCookie(cname) {
+    cname = cname + "=";
+    const allCookies = document.cookie.split(';');
+    for (let key of allCookies) {
+        key = key.trim();
+        if (key.indexOf(cname) === 0) {
+            return key.substring(cname.length);
+        }
+    }
+}
+
+function saveToSessionStorage(elementsId) {
+    const name = elementsId;
+    const value = document.getElementById("third_input").innerHTML;
+    sessionStorage.setItem(name, value);
+}
+
+function loadFromSessionStorage() {
+    document.getElementById("third_input").innerHTML = sessionStorage.getItem("third_input");
+}
+
+function checkTheBottom() {
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const maxScroll = document.documentElement.scrollHeight;
+    if (scrollPosition >= maxScroll - 1) {
+        document.body.removeAttribute("onscroll")
+        createTheButton();
+    }
+}
+
+function createTheButton() {
+    const button = document.createElement("button");
+    const parent = document.getElementById("task_14");
+    parent.appendChild(button);
+    button.classList.add("button_style");
+    button.setAttribute("id", "task_14_btn");
+    addLink();
+}
+
+function addLink() {
+    const link = document.createElement("a");
+    const parent = document.getElementById("task_14_btn");
+    parent.appendChild(link);
+    link.setAttribute("href", "#heading");
+    link.innerHTML = "Click me";
+}
 
 
 
