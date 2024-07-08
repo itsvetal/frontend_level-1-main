@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     //Information about browser's language
     document.getElementById("browser_lang").innerHTML = `Browser lang: ${navigator.language.toUpperCase()}`;
-    //Geolocation of user
+    //User geolocation
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
@@ -115,8 +115,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     //Load from local storage
     loadFromLocalStorage()
+    //Load from cookies
     loadFromCookies();
+    //Load from local storage
     loadFromSessionStorage()
+    //Add Event listeners to the squares for task 13
+    document.getElementById("task_15_red_square").addEventListener("click", redSquareAlert);
+    document.getElementById("task_15_green_square").addEventListener("click", greenSquareAlert);
+    //Make an input button not reload the page
+    const taskForm = document.getElementById("task_17_form");
+    taskForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+    })
 });
 
 function showPosition(position) {
@@ -192,8 +202,40 @@ function addLink() {
     const parent = document.getElementById("task_14_btn");
     parent.appendChild(link);
     link.setAttribute("href", "#heading");
+    link.addEventListener("click", function () {
+        setScroll("scroll-behavior", "smooth");
+    });
     link.innerHTML = "Click me";
 }
 
+function redSquareAlert(event) {
+        event.stopPropagation();
+        alert("Click from red square");
+}
+
+function greenSquareAlert() {
+    alert("Click from green square");
+}
+
+function createGreyRect() {
+    const rect = document.createElement("div");
+    rect.setAttribute("id", "grey_rect");
+    rect.addEventListener("click", hideGreyrect);
+    const parent = document.getElementById("task_16");
+    parent.appendChild(rect);
+    setScroll("overflow", "clip");
+}
+
+function setScroll(property, value) {
+    const htmlList = document.getElementsByTagName("html");
+    const element = htmlList[0];
+    element.style.setProperty(property, value);
+}
+
+function hideGreyrect() {
+    const element = document.getElementById("grey_rect");
+    element.style.zIndex = "-1";
+    setScroll("overflow", "scroll");
+}
 
 
