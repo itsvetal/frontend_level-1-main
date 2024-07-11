@@ -95,49 +95,84 @@ function showImageFromTextArea() {
     const value = document.forms["task_9_form"]["task_9_area"].value;
     const lines = value.replace(/\r\n/g).split("\n");
     console.log(lines.length);
-    lines.forEach(line => {
-        creatImg(createContainerForImg("task_9", "task_9-img_container"), line);
-    });
+    lines.forEach(line =>
+        creatImg(createContainerForImg("task_9", "task_9-img_container"), line)
+    );
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    //The coordinates of the cursor
-    document.body.addEventListener("mouseover", (event) => {
-        document.getElementById("coordinates").innerHTML = `X: ${event.pageX} Y: ${event.pageY}`;
-    });
+function drawCoordinates({pageY, pageX}) {
+    document.getElementById("coordinates").innerHTML = `X: ${pageX} Y: ${pageY}`
+}
+
+function onContentLoaded() {
+    document.body.addEventListener("mouseover", (event) => drawCoordinates(event));
+
     //Information about browser's language
     document.getElementById("browser_lang").innerHTML = `Browser lang: ${navigator.language.toUpperCase()}`;
+
     //User geolocation
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         document.getElementById("position").innerHTML = "Geolocation is not supported in your browser.";
     }
+
     //Load from local storage
-    loadFromLocalStorage()
+    loadFromLocalStorage();
+
     //Load from cookies
     loadFromCookies();
+
     //Load from local storage
-    loadFromSessionStorage()
+    loadFromSessionStorage();
+
     //Add Event listeners to the squares for task 13
-    document.getElementById("task_15_red_square").addEventListener("click", redSquareAlert);
-    document.getElementById("task_15_green_square").addEventListener("click", greenSquareAlert);
+    document.getElementById("task_15_red_square")
+        .addEventListener("click", (event) => showAlert("Click from red square", event));
+    document.getElementById("task_15_green_square")
+        .addEventListener("click", (event) => showAlert("Click from green square"));
+
     //Make an input button not reload the page
     const taskForm = document.getElementById("task_17_form");
-    taskForm.addEventListener("submit", (event) => {
+    taskForm.addEventListener("submit", (event) => event.preventDefault());
+
+    //Drag-n-Drop
+    const input = document.getElementById("nice_input");
+    input.style.display = "none";
+    document.getElementById("nice_input").addEventListener("change", () => {
+        uploadFile(input);
+    });
+    const dropZone = document.getElementById("label_text");
+    dropZone.addEventListener("dragover", (event) => {
         event.preventDefault();
-    })
-});
+    });
+    dropZone.addEventListener("dragenter", () => {
+        setRedBorder(true);
+    });
+    dropZone.addEventListener("dragleave", () => {
+        setRedBorder(false);
+    });
+    dropZone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        setRedBorder(false);
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+            input.files = files;
+            setStyle(true, input);
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", onContentLoaded);
 
 function showPosition(position) {
-    document.getElementById("position").innerHTML = `Latitude: ${position.coords.latitude}, Longitude:
-     ${position.coords.longitude}`;
+    document.getElementById("position")
+        .innerHTML = `Latitude: ${position.coords.latitude}, Longitude:${position.coords.longitude}`;
 }
 
 function saveToLocalStorage(elementsId) {
-    const name = elementsId;
     const value = document.getElementById("first_input").innerHTML;
-    localStorage.setItem(name, value);
+    localStorage.setItem(elementsId, value);
 }
 
 function loadFromLocalStorage() {
@@ -145,34 +180,29 @@ function loadFromLocalStorage() {
 }
 
 function saveToCookies(elementsId) {
-    const cname = elementsId;
-    const cvalue = document.getElementById("second_input").innerHTML;
-    setCookie(cname, cvalue);
+    const value = document.getElementById("second_input").innerHTML;
+    setCookie(elementsId, value);
 }
 
-function setCookie(cname, value) {
-    document.cookie = cname + "=" + value + "; path=/";
+function setCookie(name, value) {
+    document.cookie = name + "=" + value + "; path=/";
 }
-
 function loadFromCookies() {
     document.getElementById("second_input").innerHTML = getCookie("second_input");
 }
 
-function getCookie(cname) {
-    cname = cname + "=";
+function getCookie(name) {
+    name = name + "=";
     const allCookies = document.cookie.split(';');
-    for (let key of allCookies) {
-        key = key.trim();
-        if (key.indexOf(cname) === 0) {
-            return key.substring(cname.length);
-        }
+    const value = allCookies.find((key) => !key.trim().indexOf(name));
+    if (value) {
+        return value.split('=')[1];
     }
 }
 
 function saveToSessionStorage(elementsId) {
-    const name = elementsId;
     const value = document.getElementById("third_input").innerHTML;
-    sessionStorage.setItem(name, value);
+    sessionStorage.setItem(elementsId, value);
 }
 
 function loadFromSessionStorage() {
@@ -202,19 +232,15 @@ function addLink() {
     const parent = document.getElementById("task_14_btn");
     parent.appendChild(link);
     link.setAttribute("href", "#heading");
-    link.addEventListener("click", function () {
-        setScroll("scroll-behavior", "smooth");
-    });
+    link.addEventListener("click", () => setScroll("scroll-behavior", "smooth"));
     link.innerHTML = "Click me";
 }
 
-function redSquareAlert(event) {
+function showAlert(message, event = null) {
+    if (event) {
         event.stopPropagation();
-        alert("Click from red square");
-}
-
-function greenSquareAlert() {
-    alert("Click from green square");
+    }
+    alert(message);
 }
 
 function createGreyRect() {
@@ -227,15 +253,47 @@ function createGreyRect() {
 }
 
 function setScroll(property, value) {
-    const htmlList = document.getElementsByTagName("html");
-    const element = htmlList[0];
+    const element = document.getElementsByTagName("html")[0];
     element.style.setProperty(property, value);
 }
 
 function hideGreyrect() {
-    const element = document.getElementById("grey_rect");
-    element.style.zIndex = "-1";
+    document.getElementById("grey_rect").style.zIndex = "-1";
     setScroll("overflow", "scroll");
 }
+
+function setStyle(bool, input) {
+    const container = document.getElementById("input_container");
+    const label = document.getElementById("task_18_label");
+    const info = document.getElementById("task_18_text");
+    if (bool) {
+        label.classList.add("task_18_label_selected");
+        container.classList.add("input_container_selected");
+        info.classList.add("task_18_text_selected");
+        document.getElementById("label_text").innerText = "File selected";
+        document.getElementById("task_18_text").innerHTML = "The name of the file is: " +
+            input.files[0].name;
+        return;
+    }
+    label.classList.remove("task_18_label_selected");
+    container.classList.remove("input_container_selected");
+    info.classList.remove("task_18_text_selected");
+    document.getElementById("label_text").innerText = "Choose file to upload"
+    document.getElementById("task_18_text").innerHTML = "No files selected";
+}
+
+function uploadFile(input) {
+    input.files.length
+        ? setStyle(true, input)
+        : setStyle();
+}
+
+function setRedBorder(bool) {
+    bool
+    ? document.getElementById("input_container").classList.add("border")
+    : document.getElementById("input_container").classList.remove("border");
+}
+
+
 
 

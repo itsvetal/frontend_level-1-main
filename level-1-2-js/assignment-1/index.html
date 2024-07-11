@@ -103,10 +103,10 @@
 
     <div class="task_12">
         <div>
-        <h3>Task 10-12:</h3>
+            <h3>Task 10-12:</h3>
         </div>
         <div id="position_container">
-        <p id="position"></p>
+            <p id="position"></p>
         </div>
     </div>
 
@@ -149,7 +149,15 @@
 
     <div class="task_18 task_style">
         <h3>Task 18:</h3>
-        <input type="file" name="nice_input" id="nice_input">
+        <div class="input_container" id="input_container">
+            <div class="task_18_label" id="task_18_label">
+                <label for="nice_input" id="label_text">Choose file to upload</label>
+            </div>
+            <input type="file" name="nice_input" id="nice_input">
+            <div>
+                <p id="task_18_text" class="task_18_text">No files selected</p>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
