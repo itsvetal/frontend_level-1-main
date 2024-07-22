@@ -130,7 +130,7 @@ function onContentLoaded() {
     document.getElementById("task_15_red_square")
         .addEventListener("click", (event) => showAlert("Click from red square", event));
     document.getElementById("task_15_green_square")
-        .addEventListener("click", (event) => showAlert("Click from green square"));
+        .addEventListener("click", () => showAlert("Click from green square"));
 
     //Make an input button not reload the page
     const taskForm = document.getElementById("task_17_form");
