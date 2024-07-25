@@ -1,26 +1,7 @@
 'use strict';
 
-// let str = "How are you"
-//     .toLowerCase()
-//     .split("")
-//     .filter(element => /[a-z]/.test(element))
-//     .map(element => element.charCodeAt(0))
-//     .reduce((acum, element) => {
-//         acum[element] = (acum[element] || 0) + 1;
-//         return acum;
-//     }, [])
-//     .slice("a".charCodeAt())
-//     .map((value, idx) => ({value, idx, letter: String.fromCharCode(idx + 97)}))
-//     .sort((a, b) => (b.value || 0) - (a.value || 0))
-//     .filter(value => value !== undefined)
-//     .map(({value, letter}) => `${letter} - ${value}`)
-//     .join("\n");
-//
-// console.log(str);
-
-
 function parseCsv(csvText) {
-    const csvObj = csvText
+    const cities = csvText
         .split("\n")
         .map(e => e.trim())
         .filter(e => e.at(0) !== "#" && e !== "")
@@ -39,30 +20,34 @@ function parseCsv(csvText) {
             acc[name] = {population: population, rating: idx + 1};
             return acc;
         }, {});
-    console.log(csvObj);
-    return (string) => {
-       const cityIndexes = findIndexes(string, csvObj);
-       return cityIndexes.length > 0 ? "Yes" : "Місто не входить до топ 10 по населенню"
-
-    }
+    const replaceData = (city, rating, population) =>
+        `${city} (${rating} місце в ТОП-10 найбільших міст України, населення ${population} ${people(population)})`;
+    let city;
+    return string =>  !!(city = Object.keys(cities).find(city => string.includes(city)))
+           ? string.replace(city, replaceData(city, cities[city].rating, cities[city].population))
+           : `В рядку немає міста яке по базі данних входить до ТОП-10 найбільших міст України)`;
 }
 
-function findIndexes(string, csvObj) {
-    return Object.keys(csvObj).reduce((acc, element, idx) => {
-        if (string.indexOf(element) !== -1) {
-            acc = {
-                indexInString: string.indexOf(element),
-                indexInCities: idx
-            };
-        }
-        return acc;
-    }, {});
+function people(population) {
+    const num = (population % 100).toString();
+    switch (num) {
+        case num >= 10 && num <= 20:
+            return "людей";
+        case Number(num.at(1)) === 0:
+            return "людей";
+        case Number(num.at(1)) ===1:
+            return "людина";
+        case num.at(1) > 2 && num.at(1) < 5:
+            return "людини";
+        default:
+            return "людей";
+    }
 }
 
 let csv =
     `48.30,32.16,Кропивницький,200000,
     49.04,28.12,Жмеринка,37349,
-    47.53,35.23,Запоріжжя,815256,
+    47.53,35.23,Запоріжжя,81525,
     45.11,33.28,Євпаторія,105915,
     48.56,24.53,Івано-Франківськ,218359,
     48.43,26.45,Камянець-Подільський,99610,
@@ -92,7 +77,7 @@ let csv =
 
 let test_string =
     `Відповідно до Зведеної схеми районного
-     планування України, Покровськ займає важливе
+     планування України, Мукачеве займає важливе
      місце в регіональній системі розселення і виконує функції обласного,
      міжнародного і районного центрів, кожний з яких має свою зону міжселищного обслуговування.`;
 
