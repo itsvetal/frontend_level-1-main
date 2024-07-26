@@ -53,7 +53,7 @@ const test_string =
  * @param csvText the text in CSV format
  * @returns {function(*): *|string} the function, that takes any text and changes it
  */
-function parseCsv(csvText) {
+function getTopRank(csvText) {
 
     //Create an object with top-10 of the largest cities
     const cities = csvText
@@ -75,7 +75,6 @@ function parseCsv(csvText) {
             acc[name] = {population: population, rating: idx + 1};
             return acc;
         }, {});
-    console.log(cities);
 
     //The string to replace the city in the text
     const replaceData = (city, rating, population) =>
@@ -114,7 +113,7 @@ function people(population) {
 }
 
 //Tests the function
-let parse = parseCsv(csv)
-let result = parse(test_string);
+const cities = getTopRank(csv);
+const result = cities(test_string);
 console.log(result);
 
