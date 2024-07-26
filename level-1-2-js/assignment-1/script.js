@@ -1,17 +1,29 @@
 'use strict';
 
+/**
+ * Task 1. Hide an object by CSS
+ */
 function hideByCss() {
     document.getElementById("square").style.display = 'none';
 }
 
+/**
+ * Task 1. Hide an object by JS
+ */
 function hideByJs() {
     document.getElementById("square").remove();
 }
 
+/**
+ * Task 1. Hide an object by CSS+JS
+ */
 function hideByJsAndCss() {
     document.getElementById("square").classList.add("hidden");
 }
 
+/**
+ * Task 2. Hide and show an object on click
+ */
 function hideSquare() {
     const element = document.querySelector("#square");
     const isHidden = element.classList.contains("hidden");
@@ -21,6 +33,9 @@ function hideSquare() {
         : element.classList.remove("hidden");
 }
 
+/**
+ * Task 3. Hide and show for five objects on click
+ */
 function hideFiveBlackSquares() {
     const container = document.getElementById("task_3");
     const elements = Array.from(container.getElementsByClassName("container_for_square")[0].children);
@@ -33,6 +48,9 @@ function hideFiveBlackSquares() {
     )
 }
 
+/**
+ * Task 4. Hide elements by selector
+ */
 function hideBySelector() {
     const form = document.getElementById("selectorsForm");
     const value = form.querySelector("#selector").value;
@@ -43,7 +61,6 @@ function hideBySelector() {
     }
 
     const elements = document.querySelectorAll(value);
-
     if (!elements.length) {
         alert("No elements with given selector");
         return;
@@ -52,8 +69,11 @@ function hideBySelector() {
     elements.forEach((e) => e.style.display = e.style.display === "none" ? "" : "none")
 }
 
+/**
+ * Task 5. Add a yellow rectangle, hide it on click and show a message on second click
+ */
 function showMessageForYellowSquare() {
-    const element = document.getElementById("for_yellow_square");
+    const element = document.getElementById("yellow_square");
 
     if (!element.getAttribute("data-clicked")) {
         element.setAttribute("data-clicked", '1');
@@ -63,21 +83,36 @@ function showMessageForYellowSquare() {
     }
 }
 
+/**
+ * Task 6-7.
+ * Hide or show an element using arguments
+ * @param id id of an element
+ * @param value the value for opacity
+ */
 function setOpacity(id, value) {
     document.getElementById(id).style.opacity = value;
 }
 
+/**
+ * Task 8. Display image by the link from user input
+ */
 function showImageByLink() {
-    const value = document.forms["task_8_form"]["task_8_input"].value;
-
+    const src = document.forms["task_8_form"]["task_8_input"].value;
+    //Check the value from user's input
     if (!value) {
         alert("Please enter a link");
         return;
     }
-
-    creatImg(createContainerForImg("task_8", "task_8-img_container"), value);
+    //Create HTML elements for image
+    creatImg(createContainerForImg("task_8", "task_8-img_container"), src);
 }
 
+/**
+ * Create container for image in the DOM
+ * @param task the string with id of the parent for image container
+ * @param img_container the string with class for image container
+ * @returns {HTMLDivElement} div container for image with class "task_8-img_container"
+ */
 function createContainerForImg(task, img_container) {
     const container = document.createElement("div");
     document.getElementById(task).appendChild(container);
@@ -85,25 +120,42 @@ function createContainerForImg(task, img_container) {
     return container;
 }
 
+/**
+ * Creates an HTML element img for image from argument "src"
+ * @param container is the HTML div element, that is the container for image
+ * @param src the string with a link of the image
+ */
 function creatImg(container, src) {
     const image = document.createElement("img");
     image.src = src;
     container.appendChild(image);
 }
 
+/**
+ * Task 9.
+ * Display image using the links written by user in the HTML text area element
+ */
 function showImageFromTextArea() {
     const value = document.forms["task_9_form"]["task_9_area"].value;
-    const lines = value.replace(/\r\n/g).split("\n");
-    console.log(lines.length);
+    const lines = value.split("\n");
     lines.forEach(line =>
+        //Create container for an image and HTML img element
         creatImg(createContainerForImg("task_9", "task_9-img_container"), line)
     );
 }
 
+/**
+ * Displays coordinates of the cursor in the upper right corner of the window
+ * @param pageY coordinate from axis Y from the event
+ * @param pageX coordinate from axis X from the event
+ */
 function drawCoordinates({pageY, pageX}) {
     document.getElementById("coordinates").innerHTML = `X: ${pageX} Y: ${pageY}`
 }
 
+/**
+ * The function that is executed when the page is loaded
+ */
 function onContentLoaded() {
     document.body.addEventListener("mouseover", (event) => drawCoordinates(event));
 

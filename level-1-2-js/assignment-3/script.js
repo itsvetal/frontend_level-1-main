@@ -1,73 +1,6 @@
 'use strict';
 
 /**
- * This function takes text in CSV format and returns the function, that takes any text
- * and changes the city names in it to the string of type ""назва міста" (Х місце в ТОП-10 найбільших
- * міст України, населення УУУУУУ людина/людини/людей)"
- * @param csvText the text in CSV format
- * @returns {function(*): *|string} the function, that takes any text and changes it
- */
-function parseCsv(csvText) {
-
-    //Create object with top-10 of the largest cities
-    const cities = csvText
-        .split("\n")
-        .map(e => e.trim())
-        .filter(e => e.at(0) !== "#" && e !== "")
-        .map(e => {
-            const [x, y, name, population] = e.split(",");
-            return {
-                x: parseFloat(x),
-                y: parseFloat(y),
-                name: name,
-                population: parseInt(population)
-            };
-        })
-        .sort((a, b) => (b.population - a.population))
-        .slice(0, 10)
-        .reduce((acc, {name, population}, idx) => {
-            acc[name] = {population: population, rating: idx + 1};
-            return acc;
-        }, {});
-
-    //The string to replace the city in the text
-    const replaceData = (city, rating, population) =>
-        `${city} (${rating} місце в ТОП-10 найбільших міст України, населення ${population} ${people(population)})`;
-    //Replace the city in the text on the replaceData and return the text
-    return string =>{
-       let currentCities = Object
-           .keys(cities)
-           .filter(city => string.includes(city));
-        currentCities
-            .forEach(city => string = string
-                .replace(city, replaceData(city, cities[city].rating, cities[city].population)));
-        return string;
-    }
-}
-
-/**
- * Returns the word "люди" in the correct case depending on the number in the variable
- * "population"
- * @param population is the integer with the number of the people
- * @returns {string} the string with correct case
- */
-function people(population) {
-    const num = (population % 100).toString();
-    switch (num) {
-        case num >= 10 && num <= 20:
-            return "людей";
-        case Number(num.at(1)) === 0:
-            return "людей";
-        case Number(num.at(1)) ===1:
-            return "людина";
-        case num.at(1) > 2 && num.at(1) < 5:
-            return "людини";
-        default:
-            return "людей";
-    }
-}
-
-/**
  * Test string in the CSV format
  * @type {string}
  */
@@ -111,6 +44,74 @@ const test_string =
      планування України, Запоріжжя займає важливе
      місце в регіональній системі розселення і виконує функції обласного,
      міжнародного і районного центрів, кожний з яких має свою зону міжселищного обслуговування. Вінниця`;
+
+
+/**
+ * This function takes text in CSV format and returns the function, that takes any text
+ * and changes the city names in it to the string of type ""назва міста" (Х місце в ТОП-10 найбільших
+ * міст України, населення УУУУУУ людина/людини/людей)"
+ * @param csvText the text in CSV format
+ * @returns {function(*): *|string} the function, that takes any text and changes it
+ */
+function parseCsv(csvText) {
+
+    //Create an object with top-10 of the largest cities
+    const cities = csvText
+        .split("\n")
+        .map(e => e.trim())
+        .filter(e => e.at(0) !== "#" && e !== "")
+        .map(e => {
+            const [x, y, name, population] = e.split(",");
+            return {
+                x: parseFloat(x),
+                y: parseFloat(y),
+                name: name,
+                population: parseInt(population)
+            };
+        })
+        .sort((a, b) => (b.population - a.population))
+        .slice(0, 10)
+        .reduce((acc, {name, population}, idx) => {
+            acc[name] = {population: population, rating: idx + 1};
+            return acc;
+        }, {});
+    console.log(cities);
+
+    //The string to replace the city in the text
+    const replaceData = (city, rating, population) =>
+        `${city} (${rating} місце в ТОП-10 найбільших міст України, населення ${population} ${people(population)})`;
+
+    //Replace the city in the text on the replaceData and return the text
+    return string => Object
+        .keys(cities)
+        .filter(city => string.includes(city))
+        .reduce((acc, city) => acc
+            .replace(city, replaceData(city, cities[city]
+                .rating, cities[city]
+                .population)), string);
+}
+
+/**
+ * Returns the word "люди" in the correct case depending on the number in the variable
+ * "population"
+ * @param population is the integer with the number of the people
+ * @returns {string} the string with correct case
+ */
+function people(population) {
+    const num = (population % 100).toString();
+    switch (num) {
+        case num >= 10 && num <= 20:
+            return "людей";
+        case Number(num.at(1)) === 0:
+            return "людей";
+        case Number(num.at(1)) === 1:
+            return "людина";
+        case num.at(1) > 2 && num.at(1) < 5:
+            return "людини";
+        default:
+            return "людей";
+    }
+}
 
 //Tests the function
 let parse = parseCsv(csv)
