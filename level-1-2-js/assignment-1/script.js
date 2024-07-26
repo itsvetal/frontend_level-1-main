@@ -145,6 +145,7 @@ function showImageFromTextArea() {
 }
 
 /**
+ * Task 10.
  * Displays coordinates of the cursor in the upper right corner of the window
  * @param pageY coordinate from axis Y from the event
  * @param pageX coordinate from axis X from the event
@@ -157,56 +158,96 @@ function drawCoordinates({pageY, pageX}) {
  * The function that is executed when the page is loaded
  */
 function onContentLoaded() {
+
+    //Add EventListener for mouse cursor
     document.body.addEventListener("mouseover", (event) => drawCoordinates(event));
 
-    //Information about browser's language
+    /*
+    Task 11.
+    Displays browser language in the upper right corner of the window
+     */
     document.getElementById("browser_lang").innerHTML = `Browser lang: ${navigator.language.toUpperCase()}`;
 
-    //User geolocation
+    /*
+    Task 12.
+    Check if theuser's browser supports the geolocation.
+    If the position is successfully received, the showPosition function
+    is called
+     */
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         document.getElementById("position").innerHTML = "Geolocation is not supported in your browser.";
     }
 
-    //Load from local storage
+    //Load from local storage for task 13
     loadFromLocalStorage();
 
-    //Load from cookies
+    //Load from cookies for task 13
     loadFromCookies();
 
-    //Load from local storage
+    //Load from local storage for task 13
     loadFromSessionStorage();
 
-    //Add Event listeners to the squares for task 13
+    //Add Event listeners to the squares for task 15
     document.getElementById("task_15_red_square")
         .addEventListener("click", (event) => showAlert("Click from red square", event));
     document.getElementById("task_15_green_square")
         .addEventListener("click", () => showAlert("Click from green square"));
 
-    //Make an input button not reload the page
+    /*
+    Task 17.
+    Make an input button not reload the page
+     */
     const taskForm = document.getElementById("task_17_form");
     taskForm.addEventListener("submit", (event) => event.preventDefault());
 
-    //Drag-n-Drop
+    /*
+    Task 18
+    Hide the standart input HTML element
+     */
     const input = document.getElementById("nice_input");
     input.style.display = "none";
+
+    /*
+    Add event listener on change. When the file is changed, calls the function uploadFile()
+     */
     document.getElementById("nice_input").addEventListener("change", () => {
-        uploadFile(input);
+        chooseStyle(input);
     });
+
+    //Get HTML element of the drop zone
     const dropZone = document.getElementById("label_text");
+
+    //Add event listener on dragover and cancel default behavior
     dropZone.addEventListener("dragover", (event) => {
         event.preventDefault();
     });
+
+    /*
+    Add event listener on dragenter and call function setRedBorder()
+    on this event
+     */
     dropZone.addEventListener("dragenter", () => {
         setRedBorder(true);
     });
+
+    /*
+    Add event listener on dragleave and call function setRedBorder()
+    on this event
+     */
     dropZone.addEventListener("dragleave", () => {
         setRedBorder(false);
     });
+
+    /*
+    Add event listener on drop and call function setRedBorder()
+    on this event and cancel default behavior
+     */
     dropZone.addEventListener("drop", (event) => {
         event.preventDefault();
         setRedBorder(false);
+        //Gets the files from the event
         const files = event.dataTransfer.files;
         if (files.length > 0) {
             input.files = files;
@@ -215,34 +256,62 @@ function onContentLoaded() {
     });
 }
 
+/**
+ * Add listener for event "DOMContentLoaded", that execute function onContentLoaded
+ * when the HTML document is loaded
+ */
 document.addEventListener("DOMContentLoaded", onContentLoaded);
 
+/**
+ * Task 12.
+ * Displays coordinates of user's position in the upper right corner of the window
+ * @param position coordinates from getCurrentPosition() method
+ */
 function showPosition(position) {
     document.getElementById("position")
         .innerHTML = `Latitude: ${position.coords.latitude}, Longitude:${position.coords.longitude}`;
 }
 
+/**
+ *Task 13.
+ * Saving user data using local storage
+ * @param elementsId id of HTML element
+ */
 function saveToLocalStorage(elementsId) {
     const value = document.getElementById("first_input").innerHTML;
     localStorage.setItem(elementsId, value);
 }
 
+/**
+ * Loading user data from local storage
+ */
 function loadFromLocalStorage() {
     document.getElementById("first_input").innerHTML = localStorage.getItem("first_input");
 }
 
-function saveToCookies(elementsId) {
+/**
+ * Task 13.
+ * Saving user data using cookies
+ * @param name the HTML element's id
+ */
+function saveToCookies(name) {
     const value = document.getElementById("second_input").innerHTML;
-    setCookie(elementsId, value);
-}
-
-function setCookie(name, value) {
     document.cookie = name + "=" + value + "; path=/";
 }
+
+/**
+ * Task 13.
+ * Loading user data from cookies
+ */
 function loadFromCookies() {
     document.getElementById("second_input").innerHTML = getCookie("second_input");
 }
 
+/**
+ * Parse cookies and get the value from it
+ * @param name the key to find and get cookie value
+ * @returns {string} the value saved in the cookies
+ */
 function getCookie(name) {
     name = name + "=";
     const allCookies = document.cookie.split(';');
@@ -252,24 +321,42 @@ function getCookie(name) {
     }
 }
 
+/**
+ * Task 13.
+ * Saving user data using session storage
+ * @param elementsId the HTML element's id
+ */
 function saveToSessionStorage(elementsId) {
     const value = document.getElementById("third_input").innerHTML;
     sessionStorage.setItem(elementsId, value);
 }
 
+/**
+ * Task 13.
+ * Loading user data from session storage
+ */
 function loadFromSessionStorage() {
     document.getElementById("third_input").innerHTML = sessionStorage.getItem("third_input");
 }
 
+/**
+ * Task 14.
+ * Check the scroll position, and if it's at the bottom of the window,
+ * create button there
+ */
 function checkTheBottom() {
     const scrollPosition = window.scrollY + window.innerHeight;
     const maxScroll = document.documentElement.scrollHeight;
     if (scrollPosition >= maxScroll - 1) {
         document.body.removeAttribute("onscroll")
+        //Create the button
         createTheButton();
     }
 }
 
+/**
+ * Create the button at the bottom of the window
+ */
 function createTheButton() {
     const button = document.createElement("button");
     const parent = document.getElementById("task_14");
@@ -279,6 +366,10 @@ function createTheButton() {
     addLink();
 }
 
+/**
+ * Added a link to the button and event listener on click to the link.
+ * It calls a function setScroll on click to the button
+ */
 function addLink() {
     const link = document.createElement("a");
     const parent = document.getElementById("task_14_btn");
@@ -288,6 +379,23 @@ function addLink() {
     link.innerHTML = "Click me";
 }
 
+/**
+ * Set CSS property to the scroll using arguments
+ * @param property is the string with CSS property
+ * @param value is the string value of CSS property
+ */
+function setScroll(property, value) {
+    const element = document.getElementsByTagName("html")[0];
+    element.style.setProperty(property, value);
+}
+
+/**
+ * Task 15.
+ * Displays alert for green and red square.
+ * If an event is passed in the function arguments, the propaganation is stoped
+ * @param message the string of the message for function alert()
+ * @param event is passed by event listener
+ */
 function showAlert(message, event = null) {
     if (event) {
         event.stopPropagation();
@@ -295,6 +403,11 @@ function showAlert(message, event = null) {
     alert(message);
 }
 
+/**
+ * Task 16.
+ * Creates the gray rectangle on the entire window and
+ * blocks the scrolling on the first click.
+ */
 function createGreyRect() {
     const rect = document.createElement("div");
     rect.setAttribute("id", "grey_rect");
@@ -304,48 +417,73 @@ function createGreyRect() {
     setScroll("overflow", "clip");
 }
 
-function setScroll(property, value) {
-    const element = document.getElementsByTagName("html")[0];
-    element.style.setProperty(property, value);
-}
-
+/**
+ * Task 16.
+ * Hide the gray rectangle on the second click and unblock
+ * the scrollling
+ */
 function hideGreyrect() {
     document.getElementById("grey_rect").style.zIndex = "-1";
     setScroll("overflow", "scroll");
 }
 
+/**
+ * Show informtion about the files in the drop zone
+ * @param input HTML element input
+ */
+function showInfo(input = null) {
+    if (input) {
+        document.getElementById("label_text").innerText = "File selected";
+        document.getElementById("task_18_text").innerHTML = "The name of the file is: " +
+            input.files[0].name;
+    } else {
+        document.getElementById("label_text").innerText = "Choose file to upload"
+        document.getElementById("task_18_text").innerHTML = "No files selected";
+    }
+}
+
+/**
+ * Sets the style of the drop zone, depending on the "bool" argument
+ * @param bool is the boolean
+ * @param input HTML element input
+ */
 function setStyle(bool, input) {
     const container = document.getElementById("input_container");
     const label = document.getElementById("task_18_label");
     const info = document.getElementById("task_18_text");
+
     if (bool) {
         label.classList.add("task_18_label_selected");
         container.classList.add("input_container_selected");
         info.classList.add("task_18_text_selected");
-        document.getElementById("label_text").innerText = "File selected";
-        document.getElementById("task_18_text").innerHTML = "The name of the file is: " +
-            input.files[0].name;
+        //Show info about the files
+        showInfo(input);
         return;
     }
     label.classList.remove("task_18_label_selected");
     container.classList.remove("input_container_selected");
     info.classList.remove("task_18_text_selected");
-    document.getElementById("label_text").innerText = "Choose file to upload"
-    document.getElementById("task_18_text").innerHTML = "No files selected";
+    //Show info about the files
+    showInfo();
 }
 
-function uploadFile(input) {
+/**
+ * Calls the function setStyle(), depending on the argument "input",
+ * if the argument is empty, the setStyle() function will be called without arguments
+ * @param input HTML element input
+ */
+function chooseStyle(input) {
     input.files.length
         ? setStyle(true, input)
         : setStyle();
 }
 
+/**
+ * Set red border for drop zone if argument is true or unset if it is false
+ * @param bool is the boolean
+ */
 function setRedBorder(bool) {
     bool
-    ? document.getElementById("input_container").classList.add("border")
-    : document.getElementById("input_container").classList.remove("border");
+        ? document.getElementById("input_container").classList.add("border")
+        : document.getElementById("input_container").classList.remove("border");
 }
-
-
-
-

@@ -2,7 +2,6 @@
 
 /**
  * Test string in the CSV format
- * @type {string}
  */
 const csv =
     `48.30,32.16,Кропивницький,200000,
@@ -36,8 +35,7 @@ const csv =
     # в цьому файлі три рядки-коментаря :)`;
 
 /**
- * Test string with the text with a city which must be replaced
- * @type {string}
+ * Test text with a cities which must be replaced
  */
 const test_string =
     `Відповідно до Зведеної схеми районного
