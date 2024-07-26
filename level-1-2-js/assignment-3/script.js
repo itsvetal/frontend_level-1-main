@@ -1,6 +1,15 @@
 'use strict';
 
+/**
+ * This function takes text in CSV format and returns the function, that takes any text
+ * and changes the city names in it to the string of type ""назва міста" (Х місце в ТОП-10 найбільших
+ * міст України, населення УУУУУУ людина/людини/людей)"
+ * @param csvText the text in CSV format
+ * @returns {function(*): *|string} the function, that takes any text and changes it
+ */
 function parseCsv(csvText) {
+
+    //Create object with top-10 of the largest cities
     const cities = csvText
         .split("\n")
         .map(e => e.trim())
@@ -20,14 +29,28 @@ function parseCsv(csvText) {
             acc[name] = {population: population, rating: idx + 1};
             return acc;
         }, {});
+
+    //The string to replace the city in the text
     const replaceData = (city, rating, population) =>
         `${city} (${rating} місце в ТОП-10 найбільших міст України, населення ${population} ${people(population)})`;
-    let city;
-    return string =>  !!(city = Object.keys(cities).find(city => string.includes(city)))
-           ? string.replace(city, replaceData(city, cities[city].rating, cities[city].population))
-           : `В рядку немає міста яке по базі данних входить до ТОП-10 найбільших міст України)`;
+    //Replace the city in the text on the replaceData and return the text
+    return string =>{
+       let currentCities = Object
+           .keys(cities)
+           .filter(city => string.includes(city));
+        currentCities
+            .forEach(city => string = string
+                .replace(city, replaceData(city, cities[city].rating, cities[city].population)));
+        return string;
+    }
 }
 
+/**
+ * Returns the word "люди" in the correct case depending on the number in the variable
+ * "population"
+ * @param population is the integer with the number of the people
+ * @returns {string} the string with correct case
+ */
 function people(population) {
     const num = (population % 100).toString();
     switch (num) {
@@ -44,10 +67,14 @@ function people(population) {
     }
 }
 
-let csv =
+/**
+ * Test string in the CSV format
+ * @type {string}
+ */
+const csv =
     `48.30,32.16,Кропивницький,200000,
     49.04,28.12,Жмеринка,37349,
-    47.53,35.23,Запоріжжя,81525,
+    47.53,35.23,Запоріжжя,758011,
     45.11,33.28,Євпаторія,105915,
     48.56,24.53,Івано-Франківськ,218359,
     48.43,26.45,Камянець-Подільський,99610,
@@ -75,12 +102,17 @@ let csv =
 
     # в цьому файлі три рядки-коментаря :)`;
 
-let test_string =
+/**
+ * Test string with the text with a city which must be replaced
+ * @type {string}
+ */
+const test_string =
     `Відповідно до Зведеної схеми районного
-     планування України, Мукачеве займає важливе
+     планування України, Запоріжжя займає важливе
      місце в регіональній системі розселення і виконує функції обласного,
-     міжнародного і районного центрів, кожний з яких має свою зону міжселищного обслуговування.`;
+     міжнародного і районного центрів, кожний з яких має свою зону міжселищного обслуговування. Вінниця`;
 
+//Tests the function
 let parse = parseCsv(csv)
 let result = parse(test_string);
 console.log(result);
