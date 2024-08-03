@@ -1,10 +1,10 @@
 'use strict';
 
+
+
 function createContainer(config) {
-    const container = document.createElement("div");
-    container.setAttribute("id", config.parent);
-    document.body.appendChild(container);
-    return container;
+    const containerId = config.parent.replace("#", "");
+    return document.getElementById(containerId);
 }
 
 function createTable(container) {
@@ -63,20 +63,3 @@ function DataTable(config, data) {
     createTableHead(table, config);
     createTableBody(table, config.columns, data);
 }
-
-const config1 = {
-    parent: '#usersTable',
-    columns: [
-        {title: '№', value: "id"},
-        {title: 'Ім’я', value: 'name'},
-        {title: 'Прізвище', value: 'surname'},
-        {title: 'Вік', value: 'age'},
-    ]
-};
-
-const users = [
-    {id: 30050, name: 'Вася', surname: 'Петров', age: 12},
-    {id: 30051, name: 'Вася', surname: 'Васечкін', age: 15},
-];
-
-DataTable(config1, users);
