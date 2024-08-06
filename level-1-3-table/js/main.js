@@ -27,7 +27,7 @@ table.on("rowClick", function(e, row){
 });
 
 
-const config1 = {
+const config = {
     parent: '#usersTable',
     columns: [
         {title: '№', value: "id"},
@@ -46,4 +46,4 @@ const users = [
 
 ];
 
-DataTable(config1, users);
+DataTable(config, users);
