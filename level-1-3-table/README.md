@@ -7,12 +7,12 @@ and "data_table_style.css" for the default style of the table.
 The HTML document must also contain the HTML div element with "id" attribute.
 This HTML element will be a container for future table</p>
 
-<p>You must call the fuction DataTable(config, users)
-Function takes two arguments with data to fill table:
+<p>You must call the function DataTable(config, users).<br>
+Function takes two arguments with data to fill table: <br>
 1. The "config" argument must contain an object with two keys: "parent"
    and "columns". The "parent" key value contains the container ID
    for a table. The "columns" key value contains the reference to an array
-   of the objects with the number of the columns for future table and its headings
+   of the objects with the number of the columns for future table and its headings<br>
 2. The "data" argument must contain an array of the objects with data to fill
  the rows with the table</p>
 
