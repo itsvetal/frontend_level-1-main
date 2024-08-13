@@ -189,6 +189,9 @@ function onContentLoaded() {
     //Load from local storage for task 13
     loadFromSessionStorage();
 
+    //Add Event listener to the document for task 14
+    document.addEventListener("scroll", checkTheBottom);
+
     //Add Event listeners to the squares for task 15
     document.getElementById("task_15_red_square")
         .addEventListener("click", (event) => showAlert("Click from red square", event));
@@ -348,7 +351,8 @@ function checkTheBottom() {
     const scrollPosition = window.scrollY + window.innerHeight;
     const maxScroll = document.documentElement.scrollHeight;
     if (scrollPosition >= maxScroll - 1) {
-        document.body.removeAttribute("onscroll")
+        console.log("Bottom");
+        document.removeEventListener("scroll", checkTheBottom);
         //Create the button
         createTheButton();
     }
