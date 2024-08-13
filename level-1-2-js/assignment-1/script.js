@@ -99,7 +99,7 @@ function setOpacity(id, value) {
 function showImageByLink() {
     const src = document.forms["task_8_form"]["task_8_input"].value;
     //Check the value from user's input
-    if (!value) {
+    if (!src) {
         alert("Please enter a link");
         return;
     }
