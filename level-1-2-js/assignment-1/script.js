@@ -409,25 +409,36 @@ function showAlert(message, event = null) {
 
 /**
  * Task 16.
- * Creates the gray rectangle on the entire window and
+ * Shows the gray rectangle on the entire window and
  * blocks the scrolling on the first click.
  */
-function createGreyRect() {
-    const rect = document.createElement("div");
-    rect.setAttribute("id", "grey_rect");
-    rect.addEventListener("click", hideGreyrect);
-    const parent = document.getElementById("task_16");
-    parent.appendChild(rect);
-    setScroll("overflow", "clip");
+function showGreyRect() {
+    const rect = createGreyRect();
+    rect.addEventListener("click", removeGreyRect);
 }
+
+/**
+ * Task 16.
+ * Creates the gray rectangle
+ * @returns {HTMLDivElement} is the HTML div element like as the gray
+ * rectangle
+ */
+function createGreyRect() {
+    const child = document.createElement("div");
+    child.setAttribute("id", "grey_rect");
+    document.getElementById("task_16").appendChild(child);
+    setScroll("overflow", "hidden");
+    return child;
+}
+
 
 /**
  * Task 16.
  * Hide the gray rectangle on the second click and unblock
  * the scrollling
  */
-function hideGreyrect() {
-    document.getElementById("grey_rect").style.zIndex = "-1";
+function removeGreyRect() {
+    document.getElementById("grey_rect").remove();
     setScroll("overflow", "scroll");
 }
 
