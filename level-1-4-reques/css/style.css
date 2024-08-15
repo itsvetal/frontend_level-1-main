@@ -1,5 +1,5 @@
 table {
-    width: 100%;
+    width: 70%;
     border: 1px solid grey;
     border-spacing: 0;
     border-collapse: collapse;
@@ -16,6 +16,10 @@ th {
 
 tbody td {
     border-left: 1px solid grey;
+}
+
+td {
+    text-align: center;
 }
 
 tr:nth-child(even) {

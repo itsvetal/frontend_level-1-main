@@ -1,35 +1,37 @@
 'use strict';
 
-const config = {
-    parent: '#usersTable',
-    columns: [
-        {title: '№', value: "id"},
-        {title: 'Ім’я', value: 'name'},
-        {title: 'Прізвище', value: 'surname'},
-        {title: 'Вік', value: 'age'},
-    ]
-};
+/**
+ * Takes the date of the birthday in the ISO format and returns
+ * the age in the format - ${years} years; ${months} months; ${days} days
+ * @param birthday is the date in the ISO format
+ * @returns {string} the string with an age
+ */
+function getAge(birthday) {
+    const birthDate = new Date(birthday);
+    const today = new Date();
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+    if (days < 0) {
+        months--;
+        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate();
+    }
+    return `${years} years; ${months} months; ${days} days`;
+}
 
-const users = [
-    {id: 30050, name: 'Вася', surname: 'Петров', age: 12},
-    {id: 30051, name: 'Вася', surname: 'Васечкін', age: 15},
-    {id: 30052, name: 'Антон', surname: 'Іванов', age: 7},
-    {id: 30053, name: 'Оксана', surname: 'Крисків', age: 18},
-    {id: 30054, name: 'Григорій', surname: 'Ушаков', age: 35}
-];
-
-const config1 = {
-    parent: '#usersTable',
-    columns: [
-        {title: 'Ім’я', value: 'name'},
-        {title: 'Прізвище', value: 'surname'},
-        {title: 'Вік', value: (user) => getAge(user.birthday)}, // функцію getAge вам потрібно створити
-        {title: 'Фото', value: (user) => `<img src="${user.avatar}" alt="${user.name} ${user.surname}"/>`}
-    ],
-    apiUrl: "https://mock-api.shpp.me/vkryskiv/users"
-};
-
-DataTable1(config1);
+/**
+ * Returns string with color in the HEX format
+ * @param color is the string with value of color from config
+ * @returns {*} is the string contains the color in the HEX format
+ */
+function getColorLabel(color) {
+    return color;
+}
 
 /**
  * Returns the container for future table from the DOM
@@ -81,16 +83,20 @@ function createTableHead(table, columns) {
  */
 function fillTheRow(element, columns, tr) {
     columns.forEach(column => {
+        //Create and add the element to the row
         const td = document.createElement("td");
         tr.appendChild(td);
-        /*
-        Take the property value with name "value"
-        from the "column" and find the property name with this value
-        in the object of the "user"
-         */
-        element.hasOwnProperty(column.value)
-            ? td.textContent = element[column.value]
-            : td.textContent = "";
+        //Check the value from column.value
+        if (typeof column.value === "function") {
+            const value = column.value(element);
+            value.startsWith("#")
+                ? td.style.setProperty("background-color", value)
+                : td.innerHTML = column.value(element);
+        } else if (element.hasOwnProperty(column.value)) {
+            td.textContent = element[column.value];
+        } else {
+            td.textContent = "";
+        }
     });
 }
 
@@ -116,18 +122,41 @@ function createTableBody(table, columns, data) {
     });
 }
 
-async function parseData(promise) {
+/**
+ * Render the table on the HTML document
+ * @param config is the object contains the information about
+ * container for a table, table header, the number of the columns and maybe
+ * the reference with data for a table
+ * @param data is the object contains the data for the table to fill the rows
+ * @param table HTML element the table
+ */
+function renderTheTable(config, data, table) {
+    createTableHead(table, config.columns);
+    createTableBody(table, config.columns, data);
+}
+
+/**
+ * Send a request to the server, parse the response data
+ * and return it
+ * @param apiUrl the string with URL for request
+ * @returns {Promise<unknown[]>} Promise object with parsed data
+ */
+async function getData(apiUrl) {
+    const promise = (await fetch(apiUrl)).json();
     const obj = (await promise).data;
     return Object.values(obj);
 }
 
-async function getData(apiUrl) {
-   const promise =  (await fetch(apiUrl)).json();
-   return await parseData(promise);
-}
-
+/**
+ * Find the property "apiUrl" in the argument config and
+ * returns the promise with data
+ * @param config is the object contains the information about
+ * container for a table, table header, the number of the columns and maybe
+ * the reference with data for a table
+ * @returns {Promise<unknown[]|void>} is the Promise object with data
+ */
 async function findData(config) {
-   return config.hasOwnProperty("apiUrl")
+    return config.hasOwnProperty("apiUrl")
         ? await getData(config["apiUrl"])
         : alert(`The property "apiUrl" not found`);
 }
@@ -142,16 +171,14 @@ async function findData(config) {
  * @param data is an array of the objects, contains data to fill the rows for
  * the future table
  */
-function DataTable1(config, data = null) {
+function DataTable(config, data = null) {
     const table = config.parent
         ? createTable(getContainer(config.parent))
         : alert(`The property "parent" not found`);
 
-    if (!data) {
-        findData(config).then(data => {
-            createTableHead(table, config.columns);
-            createTableBody(table, config.columns, data);
-        });
-        console.log(data);
-    }
+    !data
+        ? findData(config)
+            .then(data => renderTheTable(config, data, table))
+            .catch((err) => alert(err))
+        : renderTheTable(config, data, table);
 }

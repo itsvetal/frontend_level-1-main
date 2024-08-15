@@ -60,6 +60,7 @@ function fillTheRow(element, columns, tr) {
         element.hasOwnProperty(column.value)
             ? td.textContent = element[column.value]
             : td.textContent = "";
+
     });
 }
 
