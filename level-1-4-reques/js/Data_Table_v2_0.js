@@ -55,6 +55,12 @@ function createTable(container) {
 
 }
 
+function createFieldActions(tr) {
+    const th = document.createElement("th");
+    th.textContent = "Дії";
+    tr.appendChild(th);
+}
+
 /**
  * Creates the heading for the table and fill it using the
  * data from argument the "columns"
@@ -67,6 +73,7 @@ function createTableHead(table, columns) {
     table.appendChild(tHead);
     const tr = document.createElement("tr");
     tHead.appendChild(tr);
+    createFieldActions(tr);
     columns.forEach(column => {
         const th = document.createElement("th");
         th.textContent = column.title;
@@ -74,15 +81,39 @@ function createTableHead(table, columns) {
     });
 }
 
+function removeTableRow(button, config) {
+   const id =  button.getAttribute("data-id");
+   const request = new Request(config.apiUrl + "/" + id, {
+       method: "DELETE",
+   });
+    console.log(request);
+    // const promise = fetch(request);
+    // DataTable(config);
+}
+
+function createDeleteButton(tr, id, config) {
+    const td = document.createElement("td");
+    tr.appendChild(td);
+    const button = document.createElement("button");
+    button.setAttribute("data-id", id + 1);
+    button.classList.add("button_style");
+    button.innerText = "Видалити";
+    td.appendChild(button);
+    button.addEventListener("click", () => removeTableRow(button, config));
+
+}
+
 /**
  * Fill the table row
  * @param element is the object with data for the table
- * @param columns is the data object with a number of the columns and the heading
+ * @param id the number with element id
+ * @param config is the data object with a number of the columns and the heading
  * of the table
  * @param tr the HTML element is the row of the table
  */
-function fillTheRow(element, columns, tr) {
-    columns.forEach(column => {
+function fillTheRow(element, id, config, tr) {
+    createDeleteButton(tr, id, config);
+    config.columns.forEach(column => {
         //Create and add the element to the row
         const td = document.createElement("td");
         tr.appendChild(td);
@@ -103,22 +134,22 @@ function fillTheRow(element, columns, tr) {
 /**
  * Creates the body of a table and fill it.
  * @param table is the HTML element, contains the future table
- * @param columns is an array of objects with data about the heading of the table
+ * @param config is an array of objects with data about the heading of the table
  * and the number of a columns for the table
  * @param data is an array of the objects to fill the rows
  */
-function createTableBody(table, columns, data) {
+function createTableBody(table, config, data) {
     //Create tbody for the table
     const tBody = document.createElement("tbody");
     table.appendChild(tBody);
     //Iterrate between users
     console.log(data);
-    data.forEach(element => {
+    data.forEach((element, id) => {
         //Create row for user
         const tr = document.createElement("tr");
         tBody.appendChild(tr);
         //Fill the row using information from object user
-        fillTheRow(element, columns, tr);
+        fillTheRow(element, id, config, tr);
     });
 }
 
@@ -132,7 +163,7 @@ function createTableBody(table, columns, data) {
  */
 function renderTheTable(config, data, table) {
     createTableHead(table, config.columns);
-    createTableBody(table, config.columns, data);
+    createTableBody(table, config, data);
 }
 
 /**
@@ -141,7 +172,7 @@ function renderTheTable(config, data, table) {
  * @param apiUrl the string with URL for request
  * @returns {Promise<unknown[]>} Promise object with parsed data
  */
-async function getData(apiUrl) {
+async function fetchData(apiUrl) {
     const promise = (await fetch(apiUrl)).json();
     const obj = (await promise).data;
     return Object.values(obj);
@@ -155,9 +186,9 @@ async function getData(apiUrl) {
  * the reference with data for a table
  * @returns {Promise<unknown[]|void>} is the Promise object with data
  */
-async function findData(config) {
+async function getData(config) {
     return config.hasOwnProperty("apiUrl")
-        ? await getData(config["apiUrl"])
+        ? await fetchData(config.apiUrl)
         : alert(`The property "apiUrl" not found`);
 }
 
@@ -172,12 +203,22 @@ async function findData(config) {
  * the future table
  */
 function DataTable(config, data = null) {
-    const table = config.parent
-        ? createTable(getContainer(config.parent))
+    //Get container for table if it exists
+    const container = config.parent
+        ? getContainer(config.parent)
         : alert(`The property "parent" not found`);
+    //Find an HTML element with tag <table>
+    const existingTable = container.querySelector("table");
+    if (existingTable) {
+        container.removeChild(existingTable);
+        console.log("Yes");
+    } {
+        console.log("No");
+    }
 
+    const table = createTable(container);
     !data
-        ? findData(config)
+        ? getData(config)
             .then(data => renderTheTable(config, data, table))
             .catch((err) => alert(err))
         : renderTheTable(config, data, table);

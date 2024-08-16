@@ -14,14 +14,30 @@ th {
     height: 40px;
 }
 
-tbody td {
-    border-left: 1px solid grey;
-}
-
 td {
+    border-left: 1px solid grey;
     text-align: center;
 }
 
 tr:nth-child(even) {
     background-color: rgba(148, 148, 148, 0.3);
+}
+
+.button_style {
+    margin: 10px 0;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5%;
+    box-shadow: 0 2px #969090;
+    cursor: pointer;
+}
+
+.button_style:hover {
+    background-color: #00d262;
+}
+
+.button_style:active {
+    box-shadow: 0 1px;
+    transform: translateY(2px);
 }
