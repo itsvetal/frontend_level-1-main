@@ -23,8 +23,8 @@ const config1 = {
     columns: [
         {title: 'Ім’я', value: 'name'},
         {title: 'Прізвище', value: 'surname'},
-        {title: 'Вік', value: (user) => getAge(user.birthday)}, // функцію getAge вам потрібно створити
-        {title: 'Фото', value: (user) => `<img src="${user.avatar}" alt="${user.name} ${user.surname}"/>`}
+        {title: 'Вік', value: (user) => getAge(user["birthday"])}, // функцію getAge вам потрібно створити
+        {title: 'Фото', value: (user) => `<img src="${user["avatar"]}" alt="${user.name} ${user.surname}"/>`}
     ],
     apiUrl: "https://mock-api.shpp.me/vkryskiv/users"
 };
@@ -33,12 +33,12 @@ const config2 = {
     parent: '#productsTable',
     columns: [
         {title: 'Назва', value: 'title'},
-        {title: 'Ціна', value: (product) => `${product.price} ${product.currency}`},
+        {title: 'Ціна', value: (product) => `${product["price"]} ${product.currency}`},
         {title: 'Колір', value: (product) => getColorLabel(product.color)}, // функцію getColorLabel вам потрібно створити
     ],
     apiUrl: "https://mock-api.shpp.me/vkryskiv/products"
 };
 
 // DataTable(config, users);
-// DataTable(config1);
+ DataTable(config1);
 DataTable(config2);

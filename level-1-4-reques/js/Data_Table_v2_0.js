@@ -52,9 +52,12 @@ function createTable(container) {
     const table = document.createElement("table");
     container.appendChild(table);
     return table;
-
 }
 
+/**
+ * Create column "Дії"
+ * @param tr is the HTML element, the row of the table
+ */
 function createFieldActions(tr) {
     const th = document.createElement("th");
     th.textContent = "Дії";
@@ -82,51 +85,58 @@ function createTableHead(table, columns) {
 }
 
 function removeTableRow(button, config) {
-   const id =  button.getAttribute("data-id");
-   const request = new Request(config.apiUrl + "/" + id, {
-       method: "DELETE",
-   });
-    console.log(request);
-    // const promise = fetch(request);
-    // DataTable(config);
+    const id = button.getAttribute("data-id");
+    const request = new Request(config.apiUrl + "/" + id, {
+        method: "DELETE",
+    });
+    fetch(request).then(() => DataTable(config));
 }
 
-function createDeleteButton(tr, id, config) {
+/**
+ * Create the button that will remove the row from the table
+ * @param tr is the HTML element <tr>, the row of the table
+ * @param id is the key to remove the row from the server
+ * @param config the object with parameters for the table
+ */
+function createButton(tr, id, config) {
     const td = document.createElement("td");
     tr.appendChild(td);
     const button = document.createElement("button");
-    button.setAttribute("data-id", id + 1);
+    button.setAttribute("data-id", id);
     button.classList.add("button_style");
     button.innerText = "Видалити";
     td.appendChild(button);
+    //Add Event listener to delete the row by click
     button.addEventListener("click", () => removeTableRow(button, config));
 
 }
 
 /**
  * Fill the table row
- * @param element is the object with data for the table
- * @param id the number with element id
+ * @param key is the object with data for the table
+ * @param data the number with element id
  * @param config is the data object with a number of the columns and the heading
  * of the table
  * @param tr the HTML element is the row of the table
  */
-function fillTheRow(element, id, config, tr) {
-    createDeleteButton(tr, id, config);
+function fillTheRow(key, data, config, tr) {
+    const obj = data[key];
+    //Create button to remove the row
+    createButton(tr, key, config);
     config.columns.forEach(column => {
         //Create and add the element to the row
         const td = document.createElement("td");
         tr.appendChild(td);
         //Check the value from column.value
         if (typeof column.value === "function") {
-            const value = column.value(element);
+            const value = column.value(obj);
             value.startsWith("#")
                 ? td.style.setProperty("background-color", value)
-                : td.innerHTML = column.value(element);
-        } else if (element.hasOwnProperty(column.value)) {
-            td.textContent = element[column.value];
+                : td.innerHTML = value;
+        } else if (obj.hasOwnProperty(column.value)) {
+            td.innerText = obj[column.value];
         } else {
-            td.textContent = "";
+            td.innerText = "";
         }
     });
 }
@@ -143,13 +153,12 @@ function createTableBody(table, config, data) {
     const tBody = document.createElement("tbody");
     table.appendChild(tBody);
     //Iterrate between users
-    console.log(data);
-    data.forEach((element, id) => {
+    Object.keys(data).forEach((key) => {
         //Create row for user
         const tr = document.createElement("tr");
         tBody.appendChild(tr);
         //Fill the row using information from object user
-        fillTheRow(element, id, config, tr);
+        fillTheRow(key, data, config, tr);
     });
 }
 
@@ -174,8 +183,7 @@ function renderTheTable(config, data, table) {
  */
 async function fetchData(apiUrl) {
     const promise = (await fetch(apiUrl)).json();
-    const obj = (await promise).data;
-    return Object.values(obj);
+    return (await promise).data;
 }
 
 /**
@@ -209,17 +217,14 @@ function DataTable(config, data = null) {
         : alert(`The property "parent" not found`);
     //Find an HTML element with tag <table>
     const existingTable = container.querySelector("table");
+    //Check the existing of the table
     if (existingTable) {
         container.removeChild(existingTable);
-        console.log("Yes");
-    } {
-        console.log("No");
     }
-
     const table = createTable(container);
+    //Check the second argument of the DataTable function
     !data
         ? getData(config)
             .then(data => renderTheTable(config, data, table))
-            .catch((err) => alert(err))
         : renderTheTable(config, data, table);
 }
