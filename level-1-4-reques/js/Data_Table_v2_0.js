@@ -64,6 +64,28 @@ function createFieldActions(tr) {
     tr.appendChild(th);
 }
 
+function createInputs(columns) {
+    console.log("Yeahh!!")
+    return undefined;
+}
+
+function createBtnToAdd(columns, th) {
+    const button = document.createElement("button");
+    th.appendChild(button);
+    button.classList.add("button_style");
+    button.innerText = "Додати";
+    button.addEventListener("click", () => createInputs(columns))
+}
+
+function createFieldToAdd(columns, tHead) {
+    const tr = document.createElement("tr");
+    tHead.appendChild(tr);
+    const th = document.createElement("th");
+    tr.appendChild(th);
+    th.setAttribute("colspan", columns.length + 1);
+    createBtnToAdd(columns, th);
+}
+
 /**
  * Creates the heading for the table and fill it using the
  * data from argument the "columns"
@@ -74,6 +96,7 @@ function createFieldActions(tr) {
 function createTableHead(table, columns) {
     const tHead = document.createElement("thead");
     table.appendChild(tHead);
+    createFieldToAdd(columns, tHead);
     const tr = document.createElement("tr");
     tHead.appendChild(tr);
     createFieldActions(tr);
@@ -84,7 +107,14 @@ function createTableHead(table, columns) {
     });
 }
 
-function removeTableRow(button, config) {
+/**
+ * Function sends request to the server with "data-id" of the row
+ * and using the "method: DELETE" to remove data from the server
+ * and render the table again
+ * @param button is the HTML element
+ * @param config the object with parameters for the table
+ */
+function clickToDel(button, config) {
     const id = button.getAttribute("data-id");
     const request = new Request(config.apiUrl + "/" + id, {
         method: "DELETE",
@@ -98,7 +128,7 @@ function removeTableRow(button, config) {
  * @param id is the key to remove the row from the server
  * @param config the object with parameters for the table
  */
-function createButton(tr, id, config) {
+function createBtnToDel(tr, id, config) {
     const td = document.createElement("td");
     tr.appendChild(td);
     const button = document.createElement("button");
@@ -107,7 +137,7 @@ function createButton(tr, id, config) {
     button.innerText = "Видалити";
     td.appendChild(button);
     //Add Event listener to delete the row by click
-    button.addEventListener("click", () => removeTableRow(button, config));
+    button.addEventListener("click", () => clickToDel(button, config));
 
 }
 
@@ -122,7 +152,7 @@ function createButton(tr, id, config) {
 function fillTheRow(key, data, config, tr) {
     const obj = data[key];
     //Create button to remove the row
-    createButton(tr, key, config);
+    createBtnToDel(tr, key, config);
     config.columns.forEach(column => {
         //Create and add the element to the row
         const td = document.createElement("td");

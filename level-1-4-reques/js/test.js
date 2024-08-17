@@ -32,13 +32,31 @@ const config1 = {
 const config2 = {
     parent: '#productsTable',
     columns: [
-        {title: 'Назва', value: 'title'},
-        {title: 'Ціна', value: (product) => `${product["price"]} ${product.currency}`},
-        {title: 'Колір', value: (product) => getColorLabel(product.color)}, // функцію getColorLabel вам потрібно створити
+        {
+            title: 'Назва',
+            value: 'title',
+            input: {type: 'text'}
+        },
+        {
+            title: 'Ціна',
+            value: (product) => `${product["price"]} ${product.currency}`,
+            input: [
+                {type: 'number', name: 'price', label: 'Ціна'},
+                {
+                    type: 'select', name: 'currency', label: 'Валюта', options: ['$', '€', '₴'],
+                    required: true,
+                }
+            ]
+        },
+        {
+            title: 'Колір',
+            value: (product) => getColorLabel(product.color),
+            input: {type: 'color', name: 'color'}
+        },
     ],
     apiUrl: "https://mock-api.shpp.me/vkryskiv/products"
 };
 
 // DataTable(config, users);
- DataTable(config1);
+DataTable(config1);
 DataTable(config2);

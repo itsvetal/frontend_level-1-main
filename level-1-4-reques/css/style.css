@@ -19,7 +19,11 @@ td {
     text-align: center;
 }
 
-tr:nth-child(even) {
+tr {
+   width: 100%;
+}
+
+tbody tr:nth-child(even) {
     background-color: rgba(148, 148, 148, 0.3);
 }
 
