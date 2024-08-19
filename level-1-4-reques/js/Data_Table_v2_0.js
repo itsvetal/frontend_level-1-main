@@ -12,15 +12,16 @@ function getAge(birthday) {
     let years = today.getFullYear() - birthDate.getFullYear();
     let months = today.getMonth() - birthDate.getMonth();
     let days = today.getDate() - birthDate.getDate();
+
     if (months < 0) {
         years--;
         months += 12;
-    }
-    if (days < 0) {
+    } else if (days < 0) {
         months--;
         const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
         days += prevMonth.getDate();
     }
+
     return `${years} years; ${months} months; ${days} days`;
 }
 
@@ -64,47 +65,169 @@ function createFieldActions(tr) {
     tr.appendChild(th);
 }
 
-function createInputs(columns) {
-    console.log("Yeahh!!")
-    return undefined;
+function addContentFromArr(inputs, form) {
+    inputs.forEach(input => {
+        addContent(input, form);
+    })
 }
 
-function createBtnToAdd(columns, th) {
+function createLabel(inputData) {
+    const label = document.createElement("label");
+    label.setAttribute("for", inputData.name);
+    label.textContent = `${inputData.label}:`;
+    return label;
+}
+
+function getType(type) {
+    switch (type) {
+        case "text":
+            return "Text";
+        case "number":
+            return "Number";
+        case "url":
+            return "URL";
+        default:
+            return "Text";
+    }
+}
+
+function createInput(inputData) {
+    const input = document.createElement("input");
+    input.setAttribute("type", inputData.type);
+    input.setAttribute("name", inputData.name);
+    input.setAttribute("id", inputData.name);
+    input.setAttribute("placeholder", getType(inputData.type));
+
+    if (inputData.hasOwnProperty("required")) {
+        input.setAttribute("required", "");
+    }
+
+    return input;
+}
+
+function createSelect(input) {
+    const select = document.createElement("select");
+    select.setAttribute("id", input.name);
+    select.setAttribute("name", input.name);
+
+    input.options.forEach(element => {
+        const option = document.createElement("option");
+        if (typeof element === "string") {
+            option.setAttribute("value", element);
+            option.textContent = element;
+        }
+        select.appendChild(option);
+    });
+
+    return select;
+}
+
+function addContent(input, form) {
+    form.appendChild(createLabel(input));
+
+    if (input.type === "select") {
+        form.appendChild(createSelect(input));
+    } else {
+        form.appendChild(document.createElement("br"));
+        form.appendChild(createInput(input));
+    }
+
+    form.appendChild(document.createElement("br"));
+}
+
+function AddSubmitBtn(form) {
+    const input = document.createElement("input");
+    input.setAttribute("type", "submit");
+    input.setAttribute("value", "Submit");
+    input.setAttribute("id", "submit");
+    input.classList.add("add_button");
+    form.appendChild(input);
+    return input;
+}
+
+function loadTheData(config, form) {
+    const formData = new FormData(form);
+    const data = {};
+   formData.forEach((value, key) => {
+
+   })
+}
+
+function createForm(config) {
+    const form = document.createElement("form");
+    config.columns.forEach(column => {
+        column.input instanceof Array
+            ? addContentFromArr(column.input, form)
+            : addContent(column.input, form);
+    });
+    AddSubmitBtn(form);
+    form.addEventListener("submit",(event) => {
+        event.preventDefault();
+        loadTheData(config, form);
+    });
+    return form;
+}
+
+function createCloseBtn(parent) {
+    const button = document.createElement("button");
+    button.setAttribute("id", "close-btn");
+    button.textContent = "Close";
+    button.classList.add("button_style");
+    button.addEventListener("click", () =>
+        parent.removeChild(document.getElementById("modal-window")));
+    return button;
+}
+
+function createModalWindow(parent, config) {
+    const existingModalWindow = parent.querySelector("#modal-window");
+    if (!existingModalWindow) {
+        const container = document.createElement("div");
+        container.setAttribute("id", "modal-window");
+        parent.appendChild(container);
+        container.appendChild(createForm(config));
+        const closeButton = createCloseBtn(parent);
+        container.appendChild(closeButton);
+    }
+}
+
+function createBtnToAdd(config, th) {
     const button = document.createElement("button");
     th.appendChild(button);
-    button.classList.add("button_style");
+    button.classList.add("add_button");
     button.innerText = "Додати";
-    button.addEventListener("click", () => createInputs(columns))
+    button.addEventListener("click", () => createModalWindow(th,config));
 }
 
-function createFieldToAdd(columns, tHead) {
+function createFieldToAdd(config, tHead) {
     const tr = document.createElement("tr");
     tHead.appendChild(tr);
     const th = document.createElement("th");
     tr.appendChild(th);
-    th.setAttribute("colspan", columns.length + 1);
-    createBtnToAdd(columns, th);
+    th.setAttribute("colspan", config.columns.length + 1);
+    th.classList.add("top_th");
+    createBtnToAdd(config, th);
 }
 
 /**
  * Creates the heading for the table and fill it using the
  * data from argument the "columns"
  * @param table is the HTML element "table"
- * @param columns is an array of objects with a number of the columns
+ * @param config is an array of objects with a number of the columns
  * and the data to fill the table heading
  */
-function createTableHead(table, columns) {
+function createTableHead(table, config) {
     const tHead = document.createElement("thead");
     table.appendChild(tHead);
-    createFieldToAdd(columns, tHead);
+    createFieldToAdd(config, tHead);
     const tr = document.createElement("tr");
     tHead.appendChild(tr);
-    createFieldActions(tr);
-    columns.forEach(column => {
+
+    config.columns.forEach(column => {
         const th = document.createElement("th");
         th.textContent = column.title;
         tr.appendChild(th);
     });
+    createFieldActions(tr);
 }
 
 /**
@@ -151,8 +274,7 @@ function createBtnToDel(tr, id, config) {
  */
 function fillTheRow(key, data, config, tr) {
     const obj = data[key];
-    //Create button to remove the row
-    createBtnToDel(tr, key, config);
+
     config.columns.forEach(column => {
         //Create and add the element to the row
         const td = document.createElement("td");
@@ -169,6 +291,8 @@ function fillTheRow(key, data, config, tr) {
             td.innerText = "";
         }
     });
+    //Create button to remove the row
+    createBtnToDel(tr, key, config);
 }
 
 /**
@@ -201,7 +325,7 @@ function createTableBody(table, config, data) {
  * @param table HTML element the table
  */
 function renderTheTable(config, data, table) {
-    createTableHead(table, config.columns);
+    createTableHead(table, config);
     createTableBody(table, config, data);
 }
 

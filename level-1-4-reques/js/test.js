@@ -21,10 +21,26 @@ const users = [
 const config1 = {
     parent: '#usersTable',
     columns: [
-        {title: 'Ім’я', value: 'name'},
-        {title: 'Прізвище', value: 'surname'},
-        {title: 'Вік', value: (user) => getAge(user["birthday"])}, // функцію getAge вам потрібно створити
-        {title: 'Фото', value: (user) => `<img src="${user["avatar"]}" alt="${user.name} ${user.surname}"/>`}
+        {
+            title: 'Ім’я',
+            value: 'name',
+            input: {type: 'text', name: 'name', label: 'Ім’я', required: true}
+        },
+        {
+            title: 'Прізвище',
+            value: 'surname',
+            input: {type: 'text', name: 'surname', label: 'Прізвище', required: true}
+        },
+        {
+            title: 'Вік',
+            value: (user) => getAge(user["birthday"]), // функцію getAge вам потрібно створити
+            input: {type: 'datetime-local', name: 'birthday', label: 'День народження', required: true}
+        },
+        {
+            title: 'Фото',
+            value: (user) => `<img src="${user["avatar"]}" alt="${user.name} ${user.surname}"/>`,
+            input: {type: 'url', name: 'avatar', label: 'Фото', required: true}
+        }
     ],
     apiUrl: "https://mock-api.shpp.me/vkryskiv/users"
 };
@@ -35,13 +51,13 @@ const config2 = {
         {
             title: 'Назва',
             value: 'title',
-            input: {type: 'text'}
+            input: {type: 'text', name: 'title', label: 'Назва', required: true}
         },
         {
             title: 'Ціна',
             value: (product) => `${product["price"]} ${product.currency}`,
             input: [
-                {type: 'number', name: 'price', label: 'Ціна'},
+                {type: 'number', name: 'price', label: 'Ціна', required: true},
                 {
                     type: 'select', name: 'currency', label: 'Валюта', options: ['$', '€', '₴'],
                     required: true,
@@ -51,12 +67,12 @@ const config2 = {
         {
             title: 'Колір',
             value: (product) => getColorLabel(product.color),
-            input: {type: 'color', name: 'color'}
+            input: {type: 'color', name: 'color', label: 'Колір', required: true}
         },
     ],
     apiUrl: "https://mock-api.shpp.me/vkryskiv/products"
 };
 
 // DataTable(config, users);
-DataTable(config1);
+ DataTable(config1);
 DataTable(config2);
