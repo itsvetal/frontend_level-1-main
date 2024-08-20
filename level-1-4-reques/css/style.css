@@ -13,10 +13,6 @@ thead {
 th {
     height: 40px;
 }
-.top_th {
-    position: relative;
-    width: 100%;
-}
 
 .add_button {
     color: black;

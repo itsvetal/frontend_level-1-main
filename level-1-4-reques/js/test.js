@@ -29,7 +29,7 @@ const config1 = {
         {
             title: 'Прізвище',
             value: 'surname',
-            input: {type: 'text', name: 'surname', label: 'Прізвище', required: true}
+            input: {type: 'text', name: 'surname', label: 'Прізвище', required: false}
         },
         {
             title: 'Вік',

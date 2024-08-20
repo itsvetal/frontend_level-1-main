@@ -8,12 +8,18 @@
  */
 function getAge(birthday) {
     const birthDate = new Date(birthday);
+    if (!birthDate.getDate()) {
+        alert("Incorrect date");
+        return "Incorrect date";
+    }
     const today = new Date();
     let years = today.getFullYear() - birthDate.getFullYear();
     let months = today.getMonth() - birthDate.getMonth();
     let days = today.getDate() - birthDate.getDate();
 
-    if (months < 0) {
+    if (birthDate > today) {
+        alert(`The date of birth: ${birthDate} is longer then todays date: ${today}`);
+    } else if (months < 0) {
         years--;
         months += 12;
     } else if (days < 0) {
@@ -98,7 +104,7 @@ function createInput(inputData) {
     input.setAttribute("id", inputData.name);
     input.setAttribute("placeholder", getType(inputData.type));
 
-    if (inputData.hasOwnProperty("required")) {
+    if (inputData.hasOwnProperty("required") && inputData.required ===true) {
         input.setAttribute("required", "");
     }
 
@@ -145,26 +151,24 @@ function AddSubmitBtn(form) {
     return input;
 }
 
-function loadTheData(config, form) {
+function loadTheData(config, serverData, form) {
     const formData = new FormData(form);
     const data = {};
    formData.forEach((value, key) => {
-
+       console.log(`key ${key} value: ${value}`);
    })
 }
 
 function createForm(config) {
     const form = document.createElement("form");
+    form.setAttribute("name", "table-form");
+    form.setAttribute("id", "table-form")
     config.columns.forEach(column => {
         column.input instanceof Array
             ? addContentFromArr(column.input, form)
             : addContent(column.input, form);
     });
     AddSubmitBtn(form);
-    form.addEventListener("submit",(event) => {
-        event.preventDefault();
-        loadTheData(config, form);
-    });
     return form;
 }
 
@@ -190,21 +194,22 @@ function createModalWindow(parent, config) {
     }
 }
 
-function createBtnToAdd(config, th) {
+function createBtnToAdd(config, parent) {
     const button = document.createElement("button");
-    th.appendChild(button);
+    parent.appendChild(button);
     button.classList.add("add_button");
+    button.setAttribute("id", "add-btn");
     button.innerText = "Додати";
-    button.addEventListener("click", () => createModalWindow(th,config));
+
 }
 
-function createFieldToAdd(config, tHead) {
+function createFieldToAdd(config, parent) {
     const tr = document.createElement("tr");
-    tHead.appendChild(tr);
+    parent.appendChild(tr);
     const th = document.createElement("th");
     tr.appendChild(th);
     th.setAttribute("colspan", config.columns.length + 1);
-    th.classList.add("top_th");
+    th.setAttribute("id","top-th");
     createBtnToAdd(config, th);
 }
 
@@ -257,11 +262,9 @@ function createBtnToDel(tr, id, config) {
     const button = document.createElement("button");
     button.setAttribute("data-id", id);
     button.classList.add("button_style");
+    button.setAttribute("id", "delete-btn");
     button.innerText = "Видалити";
     td.appendChild(button);
-    //Add Event listener to delete the row by click
-    button.addEventListener("click", () => clickToDel(button, config));
-
 }
 
 /**
@@ -316,6 +319,24 @@ function createTableBody(table, config, data) {
     });
 }
 
+function addlistenersToActions(config, data) {
+
+    const deleteBtn = document.getElementById("delete-btn");
+    deleteBtn.addEventListener("click", () => clickToDel(deleteBtn, config));
+
+    const addBtn = document.getElementById("add-btn");
+    addBtn.addEventListener("click", () => {
+        const parent = document.getElementById("top-th");
+        createModalWindow(parent, config);
+
+        const form = document.getElementById("table-form");
+        form.addEventListener("submit",(event) => {
+            event.preventDefault();
+            loadTheData(config, data, form);
+        });
+    });
+}
+
 /**
  * Render the table on the HTML document
  * @param config is the object contains the information about
@@ -327,6 +348,7 @@ function createTableBody(table, config, data) {
 function renderTheTable(config, data, table) {
     createTableHead(table, config);
     createTableBody(table, config, data);
+    addlistenersToActions(config, data);
 }
 
 /**
