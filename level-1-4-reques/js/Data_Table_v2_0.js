@@ -145,15 +145,17 @@ function AddSubmitBtn(form) {
     return input;
 }
 
-function loadTheData(config, form) {
+function loadTheData(config, form, serverData) {
     const formData = new FormData(form);
+    const keys = Object.keys(serverData);
+    console.log(typeof keys[0])
     const data = {};
    formData.forEach((value, key) => {
 
    })
 }
 
-function createForm(config) {
+function createForm(config, data) {
     const form = document.createElement("form");
     config.columns.forEach(column => {
         column.input instanceof Array
@@ -163,7 +165,7 @@ function createForm(config) {
     AddSubmitBtn(form);
     form.addEventListener("submit",(event) => {
         event.preventDefault();
-        loadTheData(config, form);
+        loadTheData(config, form, data);
     });
     return form;
 }
@@ -178,24 +180,24 @@ function createCloseBtn(parent) {
     return button;
 }
 
-function createModalWindow(parent, config) {
+function createModalWindow(parent, config, data) {
     const existingModalWindow = parent.querySelector("#modal-window");
     if (!existingModalWindow) {
         const container = document.createElement("div");
         container.setAttribute("id", "modal-window");
         parent.appendChild(container);
-        container.appendChild(createForm(config));
+        container.appendChild(createForm(config, data));
         const closeButton = createCloseBtn(parent);
         container.appendChild(closeButton);
     }
 }
 
-function createBtnToAdd(config, th) {
+function createBtnToAdd(parent) {
     const button = document.createElement("button");
-    th.appendChild(button);
+    parent.appendChild(button);
     button.classList.add("add_button");
     button.innerText = "Додати";
-    button.addEventListener("click", () => createModalWindow(th,config));
+    return button;
 }
 
 function createFieldToAdd(config, tHead) {
@@ -205,7 +207,7 @@ function createFieldToAdd(config, tHead) {
     tr.appendChild(th);
     th.setAttribute("colspan", config.columns.length + 1);
     th.classList.add("top_th");
-    createBtnToAdd(config, th);
+    return th;
 }
 
 /**
@@ -218,16 +220,15 @@ function createFieldToAdd(config, tHead) {
 function createTableHead(table, config) {
     const tHead = document.createElement("thead");
     table.appendChild(tHead);
-    createFieldToAdd(config, tHead);
     const tr = document.createElement("tr");
     tHead.appendChild(tr);
-
     config.columns.forEach(column => {
         const th = document.createElement("th");
         th.textContent = column.title;
         tr.appendChild(th);
     });
-    createFieldActions(tr);
+    createFieldActions(tr)
+    return tHead;
 }
 
 /**
@@ -256,6 +257,7 @@ function createBtnToDel(tr, id, config) {
     tr.appendChild(td);
     const button = document.createElement("button");
     button.setAttribute("data-id", id);
+    button.setAttribute("id", "delete-btn");
     button.classList.add("button_style");
     button.innerText = "Видалити";
     td.appendChild(button);
@@ -325,7 +327,10 @@ function createTableBody(table, config, data) {
  * @param table HTML element the table
  */
 function renderTheTable(config, data, table) {
-    createTableHead(table, config);
+    const parent = createFieldToAdd(config, createTableHead(table, config));
+    const addBtn = createBtnToAdd(parent);
+    addBtn.addEventListener("click", () => createModalWindow(parent, config, data));
+
     createTableBody(table, config, data);
 }
 
