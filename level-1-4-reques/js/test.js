@@ -29,7 +29,7 @@ const config1 = {
         {
             title: 'Прізвище',
             value: 'surname',
-            input: {type: 'text', name: 'surname', label: 'Прізвище', required: false}
+            input: {type: 'text', name: 'surname', label: 'Прізвище', required: true}
         },
         {
             title: 'Вік',
@@ -74,5 +74,5 @@ const config2 = {
 };
 
 // DataTable(config, users);
- DataTable(config1);
+DataTable(config1);
 DataTable(config2);

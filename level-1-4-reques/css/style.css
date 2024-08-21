@@ -31,6 +31,11 @@ th {
     transform: translateY(2px);
 }
 
+.on-add {
+    color: white;
+    background-color: rgb(44, 186, 86);
+}
+
 #modal-window {
     position: absolute;
     width: 30%;
@@ -79,4 +84,8 @@ tbody tr:nth-child(even) {
 #close-btn:hover {
     background-color: red;
     color: white;
+}
+
+input:invalid {
+    border: 1px solid red;
 }

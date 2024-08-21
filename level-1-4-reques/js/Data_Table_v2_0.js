@@ -104,7 +104,7 @@ function createInput(inputData) {
     input.setAttribute("id", inputData.name);
     input.setAttribute("placeholder", getType(inputData.type));
 
-    if (inputData.hasOwnProperty("required") && inputData.required ===true) {
+    if (inputData.hasOwnProperty("required") && inputData.required === true) {
         input.setAttribute("required", "");
     }
 
@@ -151,12 +151,43 @@ function AddSubmitBtn(form) {
     return input;
 }
 
-function loadTheData(config, serverData, form) {
+function setKey(serverData) {
+    let num = 0;
+    while (true) {
+        if (!serverData.hasOwnProperty(num.toString())) {
+            return num.toString();
+        }
+        num++;
+    }
+}
+
+function getFormData(form) {
     const formData = new FormData(form);
     const data = {};
-   formData.forEach((value, key) => {
-       console.log(`key ${key} value: ${value}`);
-   })
+    formData.forEach((value, key) => {
+        if (key === "price") {
+            data[key] = +value;
+        }
+        data[key] = value;
+    });
+    if (data.hasOwnProperty("price")) {
+        data.price = +data["price"];
+    }
+    return data;
+}
+
+function loadTheData(config, serverData, form) {
+    const key = setKey(serverData);
+    const data = getFormData(form);
+
+    const request = new Request(config.apiUrl, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    fetch(request).then(() => DataTable(config));
 }
 
 function createForm(config) {
@@ -172,24 +203,27 @@ function createForm(config) {
     return form;
 }
 
-function createCloseBtn(parent) {
+function createCloseBtn(parent, config, addBtn) {
     const button = document.createElement("button");
     button.setAttribute("id", "close-btn");
     button.textContent = "Close";
     button.classList.add("button_style");
-    button.addEventListener("click", () =>
-        parent.removeChild(document.getElementById("modal-window")));
+    button.addEventListener("click", () => {
+        parent.removeChild(document.getElementById(`modal-window-${config.parent}`));
+        addBtn.classList.remove("on-add");
+    });
     return button;
 }
 
-function createModalWindow(parent, config) {
-    const existingModalWindow = parent.querySelector("#modal-window");
+function createModalWindow(parent, config, button) {
+    const existingModalWindow = parent.querySelector("div");
     if (!existingModalWindow) {
         const container = document.createElement("div");
-        container.setAttribute("id", "modal-window");
+        container.setAttribute("id", `modal-window-${config.parent}`);
         parent.appendChild(container);
         container.appendChild(createForm(config));
-        const closeButton = createCloseBtn(parent);
+        button.classList.add("on-add")
+        const closeButton = createCloseBtn(parent, config, button);
         container.appendChild(closeButton);
     }
 }
@@ -198,7 +232,7 @@ function createBtnToAdd(config, parent) {
     const button = document.createElement("button");
     parent.appendChild(button);
     button.classList.add("add_button");
-    button.setAttribute("id", "add-btn");
+    button.setAttribute("id", `add-btn-${config.parent}`);
     button.innerText = "Додати";
 
 }
@@ -209,7 +243,7 @@ function createFieldToAdd(config, parent) {
     const th = document.createElement("th");
     tr.appendChild(th);
     th.setAttribute("colspan", config.columns.length + 1);
-    th.setAttribute("id","top-th");
+    th.setAttribute("id", "top-th");
     createBtnToAdd(config, th);
 }
 
@@ -262,7 +296,7 @@ function createBtnToDel(tr, id, config) {
     const button = document.createElement("button");
     button.setAttribute("data-id", id);
     button.classList.add("button_style");
-    button.setAttribute("id", "delete-btn");
+    button.setAttribute("id", `delete-btn-${config.parent}`);
     button.innerText = "Видалити";
     td.appendChild(button);
 }
@@ -321,16 +355,16 @@ function createTableBody(table, config, data) {
 
 function addlistenersToActions(config, data) {
 
-    const deleteBtn = document.getElementById("delete-btn");
+    const deleteBtn = document.getElementById(`delete-btn-${config.parent}`);
     deleteBtn.addEventListener("click", () => clickToDel(deleteBtn, config));
 
-    const addBtn = document.getElementById("add-btn");
+    const addBtn = document.getElementById(`add-btn-${config.parent}`);
     addBtn.addEventListener("click", () => {
         const parent = document.getElementById("top-th");
-        createModalWindow(parent, config);
+        createModalWindow(parent, config, addBtn);
 
         const form = document.getElementById("table-form");
-        form.addEventListener("submit",(event) => {
+        form.addEventListener("submit", (event) => {
             event.preventDefault();
             loadTheData(config, data, form);
         });
