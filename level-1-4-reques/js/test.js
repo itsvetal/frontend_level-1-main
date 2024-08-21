@@ -74,5 +74,5 @@ const config2 = {
 };
 
 // DataTable(config, users);
- DataTable(config1);
+DataTable(config1);
 DataTable(config2);

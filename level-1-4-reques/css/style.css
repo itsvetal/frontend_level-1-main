@@ -13,10 +13,6 @@ thead {
 th {
     height: 40px;
 }
-.top_th {
-    position: relative;
-    width: 100%;
-}
 
 .add_button {
     color: black;
@@ -33,6 +29,11 @@ th {
 
 .add_button:active {
     transform: translateY(2px);
+}
+
+.on-add {
+    color: white;
+    background-color: rgb(44, 186, 86);
 }
 
 #modal-window {
@@ -83,4 +84,8 @@ tbody tr:nth-child(even) {
 #close-btn:hover {
     background-color: red;
     color: white;
+}
+
+input:invalid {
+    border: 1px solid red;
 }
