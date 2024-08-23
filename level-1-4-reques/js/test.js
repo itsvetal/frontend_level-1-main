@@ -73,6 +73,6 @@ const config2 = {
     apiUrl: "https://mock-api.shpp.me/vkryskiv/products"
 };
 
-// DataTable(config, users);
+//DataTable(config, users);
 DataTable(config1);
 DataTable(config2);
