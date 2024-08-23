@@ -547,6 +547,11 @@ function loadTheData(config, form) {
     fetch(request).then(() => DataTable(config));
 }
 
+/**
+ * Find in the columns the property "input"
+ * @param columns an array of objects, contains columns for the table
+ * @returns {*} is the boolean
+ */
 function inputExistence(columns) {
     return columns.some(column => column.hasOwnProperty("input"));
 }
