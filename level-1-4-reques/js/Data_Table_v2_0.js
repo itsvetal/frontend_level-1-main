@@ -88,14 +88,31 @@ function getFormData(form) {
 }
 
 /**
+ * Check response on errors
+ * @param response the Response object with server's answer
+ */
+function checkData(response) {
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+}
+
+/**
  * Send a request to the server, parse the response data
  * and return it
  * @param apiUrl the string with URL for request
  * @returns {Promise<unknown[]>} Promise object with parsed data
  */
 async function fetchData(apiUrl) {
-    const promise = (await fetch(apiUrl)).json();
-    return (await promise).data;
+    try {
+        const response = (await fetch(apiUrl));
+        checkData(response);
+        const data = await response.json();
+        return data.data;
+    } catch (error) {
+        console.error("Something wrong", error);
+        return null;
+    }
 }
 
 /**
@@ -110,7 +127,7 @@ async function fetchData(apiUrl) {
 async function getData(config) {
     return config.hasOwnProperty("apiUrl")
         ? await fetchData(config.apiUrl)
-        : alert(`The property "apiUrl" not found`);
+        : null;
 }
 
 /**
@@ -530,6 +547,10 @@ function loadTheData(config, form) {
     fetch(request).then(() => DataTable(config));
 }
 
+function inputExistence(columns) {
+    return columns.some(column => column.hasOwnProperty("input"));
+}
+
 /**
  * Add event listeners to the button "додати" and to the form
  * @param config is the object contains all information
@@ -544,19 +565,23 @@ function addlistenersForToPost(config) {
     addBtn.addEventListener("click", () => {
         const parent = document.getElementById(`top-th-${config.parent}`);
 
-        //Create a modal window for a form
-        createModalWindow(parent, config, addBtn);
+        if (inputExistence(config.columns)) {
+            //Create a modal window with the form
+            createModalWindow(parent, config, addBtn);
 
-        //The form for user input
-        const form = document.getElementById("table-form");
+            //The form for user input
+            const form = document.getElementById("table-form");
 
-        //Add event listener to the form
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
+            //Add event listener to the form
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
 
-            //Load data to the server
-            loadTheData(config, form);
-        });
+                //Load data to the server
+                loadTheData(config, form);
+            });
+        } else {
+            alert("There is no fields with name \"input\" in your config for adding data");
+        }
     });
 }
 
@@ -607,5 +632,9 @@ function DataTable(config, data = null) {
     data
         ? renderTheTable(config, data, table, true)
         : getData(config)
-            .then(data => renderTheTable(config, data, table, false));
+            .then(data => {
+                data === null
+                    ? console.log(`The property "apiUrl" not found`)
+                    : renderTheTable(config, data, table, false)
+            }).catch(error => console.log(error));
 }
