@@ -120,17 +120,6 @@ This HTML element will be a container for future table:
 <div id="usersTable"></div>
 ```
 
-
-<p>You must call the function DataTable(config, users).<br>
-Function takes two arguments with data to fill table: <br>
-1. The "config" argument must contain an object with two keys: "parent"
-   and "columns". The "parent" key value contains the container ID
-   for a table. The "columns" key value contains the reference to an array
-   of the objects with the number of the columns for future table and its headings<br>
-2. The "data" argument must contain an array of the objects with data to fill
- the rows with the table</p>
-
- <p>This project contains the file test.js and index.html for testing the work of the library.
- The file index.html contains container for future table. All needed files are binded.
- The file test.js contains an example how of working with a library</p>
-
+## TEST
+The **js/test.js** contains all cases of the arguments to test the library
+and for example.
