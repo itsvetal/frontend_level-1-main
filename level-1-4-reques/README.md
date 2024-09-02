@@ -123,3 +123,6 @@ This HTML element will be a container for future table:
 ## TEST
 The **js/test.js** contains all cases of the arguments to test the library
 and for example.
+
+## LINK
+Посилання на [Github-Pages](https://itsvetal.github.io/datatable.github.io/)
